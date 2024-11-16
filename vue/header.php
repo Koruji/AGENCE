@@ -40,8 +40,9 @@
             </li> -->
         <!-- </ul> -->
 
-        <div class="text-end">
+        <!-- A AJOUTER UNE SEULE FOIS QUE QQUN EST CONNECTE -->
+        <!-- <div class="text-end">
             <button name="logout" type="button" class="btn btn-danger">Déconnexion</button>
-        </div>
+        </div> -->
     </header>
 
