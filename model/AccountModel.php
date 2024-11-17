@@ -19,6 +19,9 @@ class AccountModel extends ModelGeneric {
 
         //on associe directement la session au nouvel utilisateur de créé
         $_SESSION['user'] = serialize($this->findAccountById($lastId));
+
+        header("location: ?action=menu");
+        exit;
     }
 
     //méthode pour vérifier et se connecter avec un compte existant
@@ -35,6 +38,7 @@ class AccountModel extends ModelGeneric {
                 extract($resultat);
                 $account = new Account($id_personne, $civilite, $prenom, $nom, $login, $email, $role, $date_inscription, $tel, $mdp);
                 $_SESSION['user'] = serialize($account);
+
                 return $_SESSION['user'];
             }
         }
