@@ -31,7 +31,6 @@ class AccountModel extends ModelGeneric {
                 extract($resultat);
                 $account = new Account($id_personne, $civilite, $prenom, $nom, $login, $email, $role, $date_inscription, $tel, $mdp);
                 $_SESSION['user'] = serialize($account);
-                var_dump($account);
                 return $_SESSION['user'];
             }
         }

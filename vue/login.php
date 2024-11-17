@@ -1,3 +1,5 @@
+<?php ob_start(); ?>
+
 <form action="" method="POST">
     
     <div class="d-flex justify-content-between">
@@ -25,3 +27,7 @@
         </div>
     </div>
 </form>
+
+<?php 
+$contenu = ob_get_clean();
+include "vue/template.php";
