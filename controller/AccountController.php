@@ -11,6 +11,9 @@ class AccountController {
                     session_destroy();
                     header("location: .");
                     exit;
+                case "create":
+                    include "vue/createAccount.php";
+                    break;
             }
         }
         else if(isset($_POST["connectAccount"])) {
@@ -19,6 +22,7 @@ class AccountController {
         }
         else if(isset($_POST["createAccount"])) { 
             extract($_POST);
+            var_dump($_POST);
             $newAccount = new Account(0, $civilite, $prenom, $nom, $login,
             $email, "CLIENT", null, $tel, $mdp);
             

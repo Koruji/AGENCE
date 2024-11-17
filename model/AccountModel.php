@@ -15,6 +15,10 @@ class AccountModel extends ModelGeneric {
             "tel" => $newAccount->getTel(),
             "mdp" => password_hash($newAccount->getMdp(), PASSWORD_DEFAULT),
         ]);
+        $lastId = $this->pdo->lastInsertId();
+
+        //on associe directement la session au nouvel utilisateur de créé
+        $_SESSION['user'] = serialize($this->findAccountById($lastId));
     }
 
     //méthode pour vérifier et se connecter avec un compte existant
@@ -34,5 +38,13 @@ class AccountModel extends ModelGeneric {
                 return $_SESSION['user'];
             }
         }
+    }
+
+    //méthode pour trouver un compte par son id
+    public function findAccountById(int $id){
+        $statement = $this->executeRequest("SELECT * FROM personne WHERE id_personne = :id", ["id" => $id]);
+        extract($statement->fetch());
+
+        return new Account($id_personne, $civilite, $prenom, $nom, $login, $email, $role, $date_inscription, $tel, $mdp);
     }
 }

@@ -1,3 +1,5 @@
+<?php ob_start(); ?>
+
 <form action="" method="POST" class="p-4 bg-light rounded shadow-sm">
     <div class="form-group">
         <label for="civilite"><span class="text-danger">*</span> Civilité :</label>
@@ -49,3 +51,7 @@
 
     <input type="submit" class="btn btn-primary mt-2" name="createAccount" value="Enregistrer">
 </form>
+
+<?php 
+$contenu = ob_get_clean();
+include "vue/template.php";
