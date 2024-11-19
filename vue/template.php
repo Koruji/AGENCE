@@ -1,3 +1,7 @@
+<?php
+require_once 'classes/Account.php';  // Inclure la classe Account
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>

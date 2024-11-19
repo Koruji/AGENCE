@@ -20,7 +20,7 @@ class AccountModel extends ModelGeneric {
         //on associe directement la session au nouvel utilisateur de créé
         $_SESSION['user'] = serialize($this->findAccountById($lastId));
 
-        header("location: ?action=menu");
+        header("location: ?action=menuClient");
         exit;
     }
 
@@ -50,5 +50,19 @@ class AccountModel extends ModelGeneric {
         extract($statement->fetch());
 
         return new Account($id_personne, $civilite, $prenom, $nom, $login, $email, $role, $date_inscription, $tel, $mdp);
+    }
+
+    //méthode pour trouver tous les comptes CLIENTS
+    public function findClientAccount() {
+        $statement = $this->executeRequest("SELECT * FROM personne WHERE role = :role", [
+            "role" => "CLIENT",
+        ]);
+        $clients = [];
+
+        while($c = $statement->fetch()){
+            extract($c);
+            $clients[] = new Account($id_personne, $civilite, $prenom, $nom, $login, $email, $role, $date_inscription, $tel, $mdp);
+        }
+        return $clients;
     }
 }

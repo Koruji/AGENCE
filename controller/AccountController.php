@@ -11,8 +11,14 @@ class AccountController {
                 $connection = $accountModel->connectAccount($login, $mdp);
 
                 if ($connection != null) {
-                    header("location: ?action=menu");
-                    exit;
+                    if(unserialize($_SESSION['user'])->getRole() == "ADMIN") {
+                        header("location: ?action=menuAdmin");
+                        exit;
+                    } else {
+                        header("location: ?action=menuClient");
+                        exit;
+                    }
+                    
                 }
 
             }
@@ -34,8 +40,12 @@ class AccountController {
                     case "create":
                         include "vue/createAccount.php";
                         break;
-                    case "menu":
+                    case "menuClient":
                         include "vue/menuClient.php";
+                        break;
+                    case "menuAdmin":
+                        $nombreClients = $accountModel->findClientAccount();
+                        include "vue/menuAdmin.php";
                         break;
                 }
             }

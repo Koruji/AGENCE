@@ -13,7 +13,9 @@
             <h5 class="text-center">
                 Nombre de clients
             </h5>
-            <p> METTRE UN GROS CHIFFRE</p>
+            <p class="text-center display-1 m-0"><?php 
+                echo count($nombreClients);
+            ?></p>
         </div>
 
         <div class="flex-fill bg-light rounded p-3 d-flex flex-column">
