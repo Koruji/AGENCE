@@ -27,6 +27,9 @@ require_once 'classes/Account.php';  // Inclure la classe Account
                 <!-- ADMINISTRATEUR -->
                 <?php if( unserialize($_SESSION['user'])->getRole() == "ADMIN" ): ?>
                     <li class="nav-item">
+                        <a href="?action=menuAdmin" class="nav-link text-dark" style="background-color: white; border-radius: 10px;">Menu</a>
+                    </li>
+                    <li class="nav-item">
                         <a href="?action=gestionVehicule" class="nav-link text-dark" style="background-color: white; border-radius: 10px;">Gérer les véhicules</a>
                     </li>
                     <li class="nav-item">
@@ -39,6 +42,9 @@ require_once 'classes/Account.php';  // Inclure la classe Account
 
                 <!-- CLIENT -->
                 <?php if( unserialize($_SESSION['user'])->getRole() == "CLIENT" ): ?>
+                    <li class="nav-item">
+                        <a href="?action=menuClient" class="nav-link text-dark" style="background-color: white; border-radius: 10px;">Menu</a>
+                    </li>
                     <li class="nav-item">
                         <a href="" class="nav-link text-dark" style="background-color: white; border-radius: 10px;">Faire une réservation</a>
                     </li>

@@ -40,13 +40,6 @@ class AccountController {
                     case "create":
                         include "vue/createAccount.php";
                         break;
-                    case "menuClient":
-                        include "vue/menuClient.php";
-                        break;
-                    case "menuAdmin":
-                        $nombreClients = $accountModel->findClientAccount();
-                        include "vue/menuAdmin.php";
-                        break;
                 }
             }
         }
