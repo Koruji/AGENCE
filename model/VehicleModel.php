@@ -15,6 +15,7 @@ class VehicleModel extends ModelGeneric {
         ]);
     }
 
+    //retourne tous les véhicules de la BD
     public function findAllVehicle() {
         $statement = $this->executeRequest("SELECT * FROM vehicule");
         $vehicles = [];
@@ -24,5 +25,21 @@ class VehicleModel extends ModelGeneric {
             $vehicles[] = new Vehicle($id_vehicule, $marque, $modele, $matricule, $prix_journalier, $type_vehicule, $statut_dispo, $photo);
         }
         return $vehicles;
+    }
+
+    //trouver un véhicule par son id (peut être utile plus tard)
+    public function findVehicleById($id_vehicule) {
+        $query = $this->executeRequest("SELECT * FROM vehicule WHERE id_vehicule = : id_vehicule", [
+            "id_vehicule"=> $id_vehicule,
+        ]);
+        extract($query->fetch());
+
+        return new Vehicle($id_vehicule, $marque, $modele, $matricule, $prix_journalier, $type_vehicule, $statut_dispo, $photo);    
+    }
+
+    //supprime un véhicule par son id de la BD
+    public function deleteVehicle($id_vehicule) {
+        $query = "DELETE FROM vehicule WHERE id_vehicule = :id_vehicule";
+        $this->executeRequest($query, ["id_vehicule"=> $id_vehicule,]);
     }
 }

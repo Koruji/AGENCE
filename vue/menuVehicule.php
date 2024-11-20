@@ -34,8 +34,8 @@
                         ?> 
                     </td>
                     <td>
-                        <a href="" class="btn btn-primary mt-2">Modifier</a>
-                        <a href="" class="btn btn-primary mt-2">Supprimer</a>
+                        <a href="?action=modifierVehicule&id=<?= $vehicule->getIdVehicule() ?>" class="btn btn-primary mt-2">Modifier</a>
+                        <a href="?action=supprimerVehicule&id=<?= $vehicule->getIdVehicule()?>" class="btn btn-primary mt-2">Supprimer</a>
                     </td>
                 </tr>
             <?php endforeach; ?>

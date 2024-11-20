@@ -41,7 +41,7 @@
         <input type="file" id="photo" name="photo" class="form-control" accept="image/*">
     </div>
 
-    <button type="submit" name="addVehicle" class="btn btn-primary mt-2">Enregistrer</button>
+    <button href="?action=gestionVehicule" type="submit" name="addVehicle" class="btn btn-primary mt-2">Enregistrer</button>
 </form>
 
 <?php 

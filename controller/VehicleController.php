@@ -23,6 +23,16 @@ class VehicleController {
                     case "ajouterVehicule" : 
                         include "vue/createVehicle.php";
                         break;
+                    case "supprimerVehicule" : 
+                        $id = $_GET['id'];
+                        $vehicleModel->deleteVehicle($id);
+                        header("location: ?action=gestionVehicule");
+                        exit;
+                    case "modifierVehicule" : 
+                        $id = $_GET['id'];
+                        $vehiculeParId = $vehicleModel->findVehicleById($id);
+                        header("location: ?action=ajouterVehicule");
+                        exit;
                 }
             }
         }

@@ -46,20 +46,20 @@ class AccountModel extends ModelGeneric {
 
     //méthode pour trouver un compte par son id
     public function findAccountById(int $id){
-        $statement = $this->executeRequest("SELECT * FROM personne WHERE id_personne = :id", ["id" => $id]);
-        extract($statement->fetch());
+        $query = $this->executeRequest("SELECT * FROM personne WHERE id_personne = :id", ["id" => $id]);
+        extract($query->fetch());
 
         return new Account($id_personne, $civilite, $prenom, $nom, $login, $email, $role, $date_inscription, $tel, $mdp);
     }
 
     //méthode pour trouver tous les comptes CLIENTS
     public function findClientAccount() {
-        $statement = $this->executeRequest("SELECT * FROM personne WHERE role = :role", [
+        $query = $this->executeRequest("SELECT * FROM personne WHERE role = :role", [
             "role" => "CLIENT",
         ]);
         $clients = [];
 
-        while($c = $statement->fetch()){
+        while($c = $query->fetch()){
             extract($c);
             $clients[] = new Account($id_personne, $civilite, $prenom, $nom, $login, $email, $role, $date_inscription, $tel, $mdp);
         }
