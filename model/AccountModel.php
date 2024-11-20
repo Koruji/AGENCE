@@ -77,4 +77,10 @@ class AccountModel extends ModelGeneric {
         }
         return $personnes;
     }
+
+    //pour supprimer un compte 
+    public function deleteAccount($id_personne) {
+        $query = "DELETE FROM personne WHERE id_personne = :id_personne";
+        $this->executeRequest($query, ["id_personne" => $id_personne]);
+    }
 }

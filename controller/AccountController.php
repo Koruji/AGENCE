@@ -43,7 +43,14 @@ class AccountController {
                     case "gestionClients": 
                         $accounts = $accountModel->findAllAccount();
                         include "vue/menuAccounts.php";
-                        break;           
+                        break; 
+                    case "modifierCompte": 
+                        break;
+                    case "supprimerCompte":
+                        $id = $_GET['id'];
+                        $accountModel->deleteAccount($id);
+                        header("location: ?action=gestionClients");
+                        exit;          
                 }
             }
         }
