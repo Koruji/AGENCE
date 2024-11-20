@@ -17,11 +17,10 @@ class AccountModel extends ModelGeneric {
         ]);
         $lastId = $this->pdo->lastInsertId();
 
-        //on associe directement la session au nouvel utilisateur de créé
-        $_SESSION['user'] = serialize($this->findAccountById($lastId));
-
-        header("location: ?action=menuClient");
-        exit;
+        //on associe directement la session au nouvel utilisateur de créé si l'admin n'est pas connecté
+        if($_SESSION['user'] === null) {
+            $_SESSION['user'] = serialize($this->findAccountById($lastId));
+        }
     }
 
     //méthode pour vérifier et se connecter avec un compte existant

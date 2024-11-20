@@ -29,7 +29,7 @@
                     <td> <?= $account->getTel() ?> </td>
                     <td>
                         <a href="?action=modifierCompte&id=<?= $account->getIdPersonne() ?>" class="btn btn-primary mt-2">Modifier</a>
-                        <a href="?action=supprimerCompte&id=<?= $account->getIdPersonne()?>" class="btn btn-primary mt-2">Supprimer</a>
+                        <a href="?action=supprimerCompte&id=<?= $account->getIdPersonne()?>" class="btn btn-primary mt-2 accountSuppr">Supprimer</a>
                     </td>
                 </tr>
             <?php endforeach; ?>

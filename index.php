@@ -1,5 +1,6 @@
 <?php 
 session_start();
+
 include "classes/Account.php";
 include "classes/Vehicle.php";
 

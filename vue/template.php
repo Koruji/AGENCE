@@ -71,8 +71,7 @@ require_once 'classes/Account.php';  // Inclure la classe Account
         </a>
     </footer>
 
-    <script src="app.js"></script>
-
+    <script src="app.js?v=<?php echo time(); ?>"></script>
 </body>
 </html>
 

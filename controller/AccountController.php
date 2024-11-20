@@ -24,10 +24,23 @@ class AccountController {
             }
             else if(isset($_POST["createAccount"])) { 
                 extract($_POST);
-                $newAccount = new Account(0, $civilite, $prenom, $nom, $login,
+
+                if($_SESSION['user'] === null) {
+                    $newAccount = new Account(0, $civilite, $prenom, $nom, $login,
                 $email, "CLIENT", null, $tel, $mdp);
                 
-                $accountModel->addAccount($newAccount);
+                    $accountModel->addAccount($newAccount);
+                    header("location: ?action=menuClient");
+                    exit;
+                }
+                else {
+                    $newAccount = new Account(0, $civilite, $prenom, $nom, $login,
+                $email, "CLIENT", null, $tel, $mdp);
+                
+                    $accountModel->addAccount($newAccount);
+                    header("location: ?action=gestionClients");
+                    exit;
+                }
             }
         } else {
             if(isset($_GET["action"])) {

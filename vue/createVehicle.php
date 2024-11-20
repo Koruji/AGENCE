@@ -1,35 +1,35 @@
 <?php ob_start(); ?>
 
-<h6 id="messageErreur"></h6>
+<h6 id="messageErreurV"></h6>
 
 <form action="" id="vehicle_form" method="POST" enctype="multipart/form-data" class="p-4 bg-light rounded shadow-sm">
     <div class="form-group">
-        <label for="marque">Marque :</label>
+        <label for="marque"><span class="text-danger">*</span> Marque :</label>
         <input type="text" id="marque" name="marque" class="form-control" maxlength="25">
     </div>
 
     <div class="form-group">
-        <label for="modele">Modèle :</label>
+        <label for="modele"><span class="text-danger">*</span> Modèle :</label>
         <input type="text" id="modele" name="modele" class="form-control" maxlength="25">
     </div>
 
     <div class="form-group">
-        <label for="matricule">Matricule :</label>
+        <label for="matricule"><span class="text-danger">*</span> Matricule :</label>
         <input type="text" id="matricule" name="matricule" class="form-control" maxlength="25">
     </div>
 
     <div class="form-group">
-        <label for="prix_journalier">Prix Journalier :</label>
+        <label for="prix_journalier"><span class="text-danger">*</span> Prix Journalier :</label>
         <input type="number" id="prix_journalier" name="prix_journalier" class="form-control">
     </div>
 
     <div class="form-group">
-        <label for="type_vehicule">Type de Véhicule :</label>
+        <label for="type_vehicule"><span class="text-danger">*</span> Type de Véhicule :</label>
         <input type="text" id="type_vehicule" name="type_vehicule" class="form-control">
     </div>
 
     <div class="form-group">
-        <label for="statut_dispo">Statut Disponibilité :</label>
+        <label for="statut_dispo"><span class="text-danger">*</span> Statut Disponibilité :</label>
         <select id="statut_dispo" name="statut_dispo" class="form-control">
             <option value="1">Disponible</option>
             <option value="0">Indisponible</option>
@@ -41,7 +41,7 @@
         <input type="file" id="photo" name="photo" class="form-control" accept="image/*">
     </div>
 
-    <button href="?action=gestionVehicule" type="submit" name="addVehicle" class="btn btn-primary mt-2">Enregistrer</button>
+    <input href="?action=gestionVehicule" type="submit" name="addVehicle" class="btn btn-primary mt-2" value="Enregistrer">
 </form>
 
 <?php 
