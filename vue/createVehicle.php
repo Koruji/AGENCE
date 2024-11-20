@@ -25,7 +25,11 @@
 
     <div class="form-group">
         <label for="type_vehicule"><span class="text-danger">*</span> Type de Véhicule :</label>
-        <input type="text" id="type_vehicule" name="type_vehicule" class="form-control">
+        <select id="type_vehicule" name="type_vehicule" class="form-control">
+            <option value="voiture">Voiture</option>
+            <option value="2_roues">2 roues</option>
+            <option value="camion">Camion</option>
+        </select>
     </div>
 
     <div class="form-group">
