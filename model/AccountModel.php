@@ -65,4 +65,16 @@ class AccountModel extends ModelGeneric {
         }
         return $clients;
     }
+
+    //retourne tous les comptes de la BD
+    public function findAllAccount() {
+        $statement = $this->executeRequest("SELECT * FROM personne");
+        $personnes = [];
+
+        while($c = $statement->fetch()){
+            extract($c);
+            $personnes[] = new Account($id_personne, $civilite, $prenom, $nom, $login, $email, $role, $date_inscription, $tel, $mdp);
+        }
+        return $personnes;
+    }
 }

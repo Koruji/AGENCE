@@ -23,7 +23,7 @@
                 Accéder au service de location de &copy; Rent - a - Car en toute simplicité
                 en vous créant un compte.
             </p>
-            <a href="?action=create" class="btn btn-primary mt-2">Créer un compte</a>
+            <a href="?action=createAccount" class="btn btn-primary mt-2">Créer un compte</a>
         </div>
     </div>
 </form>

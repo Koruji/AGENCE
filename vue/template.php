@@ -33,7 +33,7 @@ require_once 'classes/Account.php';  // Inclure la classe Account
                         <a href="?action=gestionVehicule" class="nav-link text-dark" style="background-color: white; border-radius: 10px;">Gérer les véhicules</a>
                     </li>
                     <li class="nav-item">
-                        <a href="" class="nav-link text-dark" style="background-color: white; border-radius: 10px;">Gérer les utilisateurs</a>
+                        <a href="?action=gestionClients" class="nav-link text-dark" style="background-color: white; border-radius: 10px;">Gérer les utilisateurs</a>
                     </li>
                     <li class="nav-item">
                         <a href="" class="nav-link text-dark" style="background-color: white; border-radius: 10px;">Gérer les réservations</a>

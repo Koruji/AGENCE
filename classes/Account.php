@@ -60,7 +60,7 @@ class Account {
         return $this->date_inscription;
     }
 
-    public function gettel(){
+    public function getTel(){
         return $this->tel;
     }
 

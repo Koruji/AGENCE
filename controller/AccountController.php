@@ -37,9 +37,13 @@ class AccountController {
                         session_destroy();
                         header("location: .");
                         exit;
-                    case "create":
+                    case "createAccount":
                         include "vue/createAccount.php";
                         break;
+                    case "gestionClients": 
+                        $accounts = $accountModel->findAllAccount();
+                        include "vue/menuAccounts.php";
+                        break;           
                 }
             }
         }
