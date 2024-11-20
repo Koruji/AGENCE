@@ -27,7 +27,7 @@ require_once 'classes/Account.php';  // Inclure la classe Account
                 <!-- ADMINISTRATEUR -->
                 <?php if( unserialize($_SESSION['user'])->getRole() == "ADMIN" ): ?>
                     <li class="nav-item">
-                        <a href="" class="nav-link text-dark" style="background-color: white; border-radius: 10px;">Gérer les véhicules</a>
+                        <a href="?action=gestionVehicule" class="nav-link text-dark" style="background-color: white; border-radius: 10px;">Gérer les véhicules</a>
                     </li>
                     <li class="nav-item">
                         <a href="" class="nav-link text-dark" style="background-color: white; border-radius: 10px;">Gérer les utilisateurs</a>
