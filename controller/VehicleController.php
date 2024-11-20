@@ -18,10 +18,10 @@ class VehicleController {
                 switch ($action) {
                     case "gestionVehicule" : 
                         $vehicules = $vehicleModel->findAllVehicle();
-                        include "vue/menuVehicule.php";
+                        include "vue/manageVehicule.php";
                         break;
                     case "ajouterVehicule" : 
-                        include "vue/createVehicle.php";
+                        include "vue/formVehicle.php";
                         break;
                     case "supprimerVehicule" : 
                         $id = $_GET['id'];

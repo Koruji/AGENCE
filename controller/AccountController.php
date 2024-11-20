@@ -51,11 +51,11 @@ class AccountController {
                         header("location: .");
                         exit;
                     case "createAccount":
-                        include "vue/createAccount.php";
+                        include "vue/formAccount.php";
                         break;
                     case "gestionClients": 
                         $accounts = $accountModel->findAllAccount();
-                        include "vue/menuAccounts.php";
+                        include "vue/manageAccount.php";
                         break; 
                     case "modifierCompte": 
                         break;
