@@ -9,12 +9,15 @@ class VehicleController {
                 extract($_POST);
                 $newVehicle = new Vehicle(0, $marque, $modele, $matricule, $prix_journalier, $type_vehicule, $statut_dispo, '');
                 $vehicleModel->addVehicle($newVehicle);
+                header("location: ?action=gestionVehicule");
+                exit;
             }
         } else {
             if(isset($_GET['action'])) {
                 $action = $_GET['action'];
                 switch ($action) {
                     case "gestionVehicule" : 
+                        $vehicules = $vehicleModel->findAllVehicle();
                         include "vue/menuVehicule.php";
                         break;
                     case "ajouterVehicule" : 

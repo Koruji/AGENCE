@@ -14,4 +14,15 @@ class VehicleModel extends ModelGeneric {
             "statut_dispo" => $vehicle->getStatutDispo(),
         ]);
     }
+
+    public function findAllVehicle() {
+        $statement = $this->executeRequest("SELECT * FROM vehicule");
+        $vehicles = [];
+
+        while($v = $statement->fetch()){
+            extract($v);
+            $vehicles[] = new Vehicle($id_vehicule, $marque, $modele, $matricule, $prix_journalier, $type_vehicule, $statut_dispo, $photo);
+        }
+        return $vehicles;
+    }
 }
