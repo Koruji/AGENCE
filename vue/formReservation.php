@@ -4,7 +4,7 @@
     <h5>Réservations</h5>
 </div>
 
-<h6><?php if(isset($erreur)) { echo $erreur; }?></h6>
+<h6 class="text-danger" id="messageErreur"><?php if(isset($erreur)) { echo '<i class="bi bi-exclamation-triangle-fill"></i> ' . htmlspecialchars($erreur); }?></h6>
 
 <form action="" method="POST" class="p-4 bg-light rounded shadow-sm">
     <input type="hidden" name="idPersonne" value="<?= htmlspecialchars($idPersonne); ?>">
@@ -31,7 +31,7 @@
         <input type="number" id="id_personne" name="id_personne" class="form-control" required>
     </div>
     -->
-    <input name="addReservation" type="submit" class="btn btn-primary mt-2" value="Enregistrer">
+    <input id="addReservation" name="addReservation" type="submit" class="btn btn-primary mt-2" value="Enregistrer">
 </form>
 
 <?php 

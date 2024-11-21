@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // Variables
     let formulaireInscription = document.getElementById("inscription_form");
     let formulaireVehicule = document.getElementById("vehicle_form");
+    let boutonConfirmerResa = document.getElementById("addReservation");
     let zoneMessageErreur = document.getElementById("messageErreur");
     let zoneMessageErreurV = document.getElementById("messageErreurV")
     //------------------------------------VERIFICATION DU FORMULAIRE COMPTE---------------------------------------------//
@@ -114,6 +115,23 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
             });
         });
-    }    
+    }
+    //------------------------------------------------------VERIFICATION DES DATES DE RESERVATION 
+    if (boutonConfirmerResa) {
+        boutonConfirmerResa.addEventListener("click", function(event) {
+            let dateDebut = document.getElementById("date_debut");
+            let dateFin = document.getElementById("date_fin");
+            let messageErreurR = document.getElementById("messageErreur");
+            messageErreurR.innerHTML = "";
+
+            if (dateDebut.value > dateFin.value) {
+                event.preventDefault();
+                messageErreurR.innerHTML += `<i class="bi bi-exclamation-triangle-fill"></i> La date de début doit être inférieure à la date de fin.<br>`;
+            } 
+        });
+    };
 });
+
+
+
 
