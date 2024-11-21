@@ -27,6 +27,16 @@
         </div>
     </div>
 </form>
+<div class="flex-grow-2 bg-light rounded p-3 d-flex flex-column mt-3">
+    <h5 class="text-center">
+        Véhicules disponibles
+    </h5>
+    <p>
+        Envie de louer un véhicule ? 
+        Regardez notre sélection disponible à la location.
+    </p>
+    <a href="" class="btn btn-primary mt-2">OK</a>
+</div>
 
 <?php 
 $contenu = ob_get_clean();

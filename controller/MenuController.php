@@ -4,6 +4,7 @@ class MenuController {
     public function dashboard() {
         $modelAccount = new AccountModel();
         $modelVehicle = new VehicleModel();
+        $modelReservation = new ReservationModel();
 
         if(isset($_GET["action"])) {
             $action = $_GET["action"];
@@ -15,6 +16,8 @@ class MenuController {
                     include "vue/menuAdmin.php";
                     break;
                 case "menuClient":
+                    $idUser = unserialize($_SESSION['user'])->getIdPersonne();
+                    $reservationClient = $modelReservation->findAllReservation($idUser);
                     include "vue/menuClient.php";
                     break;
                 case "listVehicle":

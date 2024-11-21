@@ -27,4 +27,18 @@ class ReservationModel extends ModelGeneric {
         }
         return "";
     }
+
+    //pour récupérer toutes les réservations d'un compte client
+    public function findAllReservation($idPersonne) {
+        $statement = $this->executeRequest("SELECT * FROM reservation WHERE id_personne = :id_personne", [
+            "id_personne" => $idPersonne,
+        ]);
+        $reservations = [];
+
+        while($r = $statement->fetch()){
+            extract($r);
+            $reservations[] = new Reservation($id_vehicule, $id_personne, $id_reservation, $date_reservation, $date_debut, $date_fin);
+        }
+        return $reservations;
+    }
 }
