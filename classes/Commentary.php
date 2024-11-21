@@ -8,13 +8,13 @@ class Commentary {
     private $id_vehicule;
     private $id_personne;
 
-    public function __construct(Vehicle $id_vehicule, Account $id_personne, $id_commentaire = '', $commentaire = '', $dateCommentaire = '', $note = '') {
+    public function __construct($id_vehicule, $id_personne, $id_commentaire = '', $commentaire = '', $dateCommentaire = '', $note = '') {
         $this->id_commentaire = $id_commentaire;
         $this->commentaire = $commentaire;
         $this->dateCommentaire = $dateCommentaire;
         $this->note = $note;
-        $this->id_vehicule = $id_vehicule->getIdVehicule();
-        $this->id_personne = $id_personne->getIdPersonne();
+        $this->id_vehicule = $id_vehicule;
+        $this->id_personne = $id_personne;
     }
 
     //---------------------------------GETTER ET SETTER 

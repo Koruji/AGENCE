@@ -46,7 +46,7 @@ require_once 'classes/Account.php';  // Inclure la classe Account
                         <a href="?action=menuClient" class="nav-link text-dark" style="background-color: white; border-radius: 10px;">Menu</a>
                     </li>
                     <li class="nav-item">
-                        <a href="" class="nav-link text-dark" style="background-color: white; border-radius: 10px;">Faire une réservation</a>
+                        <a href="?action=listVehicle" class="nav-link text-dark" style="background-color: white; border-radius: 10px;">Faire une réservation</a>
                     </li>
                     <li class="nav-item">
                         <a href="" class="nav-link text-dark" style="background-color: white; border-radius: 10px;">Commentaires et notes</a>

@@ -17,6 +17,10 @@ class MenuController {
                 case "menuClient":
                     include "vue/menuClient.php";
                     break;
+                case "listVehicle":
+                    $vehiculeDispo = $modelVehicle->findAvailableVehicle();
+                    include "vue/listVehicule.php";
+                    break;
             }
         
         }

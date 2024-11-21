@@ -57,4 +57,18 @@ class VehicleModel extends ModelGeneric {
             "photo" => $vehicle->getPhoto(),
         ]);
     }
+
+    //trouver tous les véhicules disponibles dans la BD
+    public function findAvailableVehicle() {
+        $statement = $this->executeRequest("SELECT * FROM vehicule WHERE statut_dispo = :statut_dispo", [
+            "statut_dispo" => 1,
+        ]);
+        $vehicles = [];
+
+        while($v = $statement->fetch()){
+            extract($v);
+            $vehicles[] = new Vehicle($id_vehicule, $marque, $modele, $matricule, $prix_journalier, $type_vehicule, $statut_dispo, $photo);
+        }
+        return $vehicles;
+    }
 }

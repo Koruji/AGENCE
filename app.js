@@ -101,9 +101,10 @@ document.addEventListener("DOMContentLoaded", function() {
                 }
             });
         });
-    } else if(boutonConfirmerVehicule) {
-        boutonConfirmerVehicule.forEach(function(bouton) {
-            bouton.addEventListener("click", function(event) {
+    }
+    if(boutonConfirmerVehicule) {
+        boutonConfirmerVehicule.forEach(function(boutonV) {
+            boutonV.addEventListener("click", function(event) {
                 event.preventDefault();
                 let userResponseV = confirm("Voulez-vous supprimer ce véhicule ?");
                 if(userResponseV) {

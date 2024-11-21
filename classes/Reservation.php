@@ -8,13 +8,13 @@ class Reservation {
     private $id_vehicule;
     private $id_personne;
 
-    public function __construct(Vehicle $id_vehicule, Account $id_personne, $id_reservation = '', $date_reservation = '', $date_debut = '', $date_fin = '') {
+    public function __construct($id_vehicule, $id_personne, $id_reservation = '', $date_reservation = '', $date_debut = '', $date_fin = '') {
         $this->id_reservation = $id_reservation;
         $this->date_reservation = $date_reservation;
         $this->date_debut = $date_debut;
         $this->date_fin = $date_fin;
-        $this->id_vehicule = $id_vehicule->getIdVehicule();
-        $this->id_personne = $id_personne->getIdPersonne();
+        $this->id_vehicule = $id_vehicule;
+        $this->id_personne = $id_personne;
     }
 
     //-----------------------------------------GETTER ET SETTER

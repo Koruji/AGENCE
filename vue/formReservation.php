@@ -4,7 +4,12 @@
     <h5>Réservations</h5>
 </div>
 
+<h6><?php if(isset($erreur)) { echo $erreur; }?></h6>
+
 <form action="" method="POST" class="p-4 bg-light rounded shadow-sm">
+    <input type="hidden" name="idPersonne" value="<?= htmlspecialchars($idPersonne); ?>">
+    <input type="hidden" name="idVehicule" value="<?= htmlspecialchars($idVehicule); ?>">
+
     <div class="form-group">
         <label for="date_debut">Date de Début :</label>
         <input type="date" id="date_debut" name="date_debut" class="form-control" required>
@@ -26,7 +31,7 @@
         <input type="number" id="id_personne" name="id_personne" class="form-control" required>
     </div>
     -->
-    <button type="submit" class="btn btn-primary mt-2">Enregistrer</button>
+    <input name="addReservation" type="submit" class="btn btn-primary mt-2" value="Enregistrer">
 </form>
 
 <?php 
