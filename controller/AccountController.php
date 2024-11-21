@@ -2,6 +2,7 @@
 
 class AccountController {
 
+    private $compteSauv;
     public function actionAccount() {
         $accountModel = new AccountModel();
 
@@ -11,7 +12,7 @@ class AccountController {
                 $connection = $accountModel->connectAccount($login, $mdp);
 
                 if ($connection != null) {
-                    if(unserialize($_SESSION['user'])->getRole() == "ADMIN") {
+                    if(unserialize($_SESSION['user'])->getRole() === "ADMIN") {
                         header("location: ?action=menuAdmin");
                         exit;
                     } else {
@@ -42,6 +43,30 @@ class AccountController {
                     exit;
                 }
             }
+            else if(isset($_POST["modifyAccount"])) {
+                extract($_POST);
+                $modifyAccount = new Account();
+            
+                $compteSauv = unserialize($_SESSION['compteSauv']);
+
+                $modifyAccount->setIdPersonne($compteSauv->getIdPersonne());
+                var_dump($compteSauv->getIdPersonne()); ////
+                $modifyAccount->setCivilite($civilite);
+                $modifyAccount->setPrenom($prenom);
+                $modifyAccount->setLogin($login);
+                $modifyAccount->setNom($nom);
+                $modifyAccount->setEmail($email);
+                $modifyAccount->setRole($role);
+                $modifyAccount->setDateInscription(null);
+                $modifyAccount->setTel($tel);
+                $modifyAccount->setMdp($compteSauv->getMdp());
+
+                $accountModel->updateAccount($modifyAccount);
+
+                $_SESSION['compteSauv'] = null;
+                header("location: ?action=gestionClients");
+                exit;
+            }
         } else {
             if(isset($_GET["action"])) {
                 $action = $_GET["action"];
@@ -58,6 +83,10 @@ class AccountController {
                         include "vue/manageAccount.php";
                         break; 
                     case "modifierCompte": 
+                        $id = $_GET['id'];
+                        $compte = $accountModel->findAccountById($id);
+                        $_SESSION['compteSauv'] = serialize($compte);
+                        include "vue/formAccount.php";
                         break;
                     case "supprimerCompte":
                         $id = $_GET['id'];

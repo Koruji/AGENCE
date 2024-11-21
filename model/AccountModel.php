@@ -82,4 +82,19 @@ class AccountModel extends ModelGeneric {
         $query = "DELETE FROM personne WHERE id_personne = :id_personne";
         $this->executeRequest($query, ["id_personne" => $id_personne]);
     }
+
+    //pour modifier un compte
+    public function updateAccount(Account $account) {
+        $query = "UPDATE personne SET civilite = :civilite, prenom = :prenom, nom = :nom, login = :login, email = :email, role = :role, date_inscription = now(), tel = :tel WHERE personne.id_personne = :id_personne";
+        $this->executeRequest($query, [
+            "id_personne" => $account->getIdPersonne(),
+            "civilite" => $account->getCivilite(),
+            "prenom" => $account->getPrenom(),
+            "nom" => $account->getNom(),
+            "login" => $account->getLogin(),
+            "email" => $account->getEmail(),
+            "role" => $account->getRole(),
+            "tel" => $account->getTel(),
+        ]);
+    }
 }

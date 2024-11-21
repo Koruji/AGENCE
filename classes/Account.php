@@ -12,8 +12,8 @@ class Account {
     private $tel;
     private $mdp;
 
-    public function __construct($p_id_personne, $p_civilite, $p_prenom, $p_nom, $p_login, $p_email, $p_role, 
-        $p_date_inscription, $p_tel, $p_mdp) 
+    public function __construct($p_id_personne = '', $p_civilite = '', $p_prenom = '', $p_nom = '', $p_login = '', $p_email = '', $p_role = '', 
+        $p_date_inscription = '', $p_tel = '', $p_mdp = '') 
     {
             $this->id_personne = $p_id_personne;
             $this->civilite = $p_civilite;
