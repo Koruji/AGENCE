@@ -1,11 +1,20 @@
 <?php ob_start(); ?>
 
-<div class="container vh-100 d-flex">
+<div class="d-flex">
     <div class="w-50 bg-light rounded p-3 me-3 d-flex flex-column">
         <h5 class="text-center">
-            Mes réservations en cours...
+            Mes réservations
         </h5>
-        <p> A compléter avec les évaluations déjà mise !</p>
+        <table class="table table-striped">
+            <?php foreach($reservationClient as $reservation): ?>
+                <tr>
+                    <th><?= $reservation->getDateDebut() ?></th>
+                    <th><?= $reservation->getDateFin() ?></th>
+                    <th><?= $reservation->getIdVehicule() ?></th>
+                    <th></th>
+                </tr>
+            <?php endforeach; ?>
+        </table>
     </div>
 
     <div class="w-50 d-flex flex-column">
