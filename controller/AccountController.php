@@ -2,7 +2,6 @@
 
 class AccountController {
 
-    private $compteSauv;
     public function actionAccount() {
         $accountModel = new AccountModel();
 

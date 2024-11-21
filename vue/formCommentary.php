@@ -1,3 +1,5 @@
+<?php ob_start(); ?>
+
 <div class="d-flex justify-content-center">
     <h5>Commentaires et notes</h5>
 </div>
@@ -26,3 +28,7 @@
     -->
     <button type="submit" class="btn btn-primary mt-2">Poster</button>
 </form>
+
+<?php 
+$contenu = ob_get_clean();
+include "vue/template.php";
