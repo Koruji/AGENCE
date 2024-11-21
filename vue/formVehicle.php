@@ -5,22 +5,22 @@
 <form action="" id="vehicle_form" method="POST" enctype="multipart/form-data" class="p-4 bg-light rounded shadow-sm">
     <div class="form-group">
         <label for="marque"><span class="text-danger">*</span> Marque :</label>
-        <input type="text" id="marque" name="marque" class="form-control" maxlength="25">
+        <input type="text" id="marque" name="marque" class="form-control" maxlength="25" value="<?php if(isset($vehicule)) { echo $vehicule->getMarque();} ?>">
     </div>
 
     <div class="form-group">
         <label for="modele"><span class="text-danger">*</span> Modèle :</label>
-        <input type="text" id="modele" name="modele" class="form-control" maxlength="25">
+        <input type="text" id="modele" name="modele" class="form-control" maxlength="25" value="<?php if(isset($vehicule)) { echo $vehicule->getModele();} ?>">
     </div>
 
     <div class="form-group">
         <label for="matricule"><span class="text-danger">*</span> Matricule :</label>
-        <input type="text" id="matricule" name="matricule" class="form-control" maxlength="25">
+        <input type="text" id="matricule" name="matricule" class="form-control" maxlength="25" value="<?php if(isset($vehicule)) { echo $vehicule->getMatricule();} ?>">
     </div>
 
     <div class="form-group">
         <label for="prix_journalier"><span class="text-danger">*</span> Prix Journalier :</label>
-        <input type="number" id="prix_journalier" name="prix_journalier" class="form-control">
+        <input type="number" id="prix_journalier" name="prix_journalier" class="form-control" value="<?php if(isset($vehicule)) { echo $vehicule->getPrixJournalier();} ?>">
     </div>
 
     <div class="form-group">
@@ -42,10 +42,10 @@
 
     <div class="form-group">
         <label for="photo">Photo :</label>
-        <input type="file" id="photo" name="photo" class="form-control" accept="image/*">
+        <input type="file" id="photo" name="photo" class="form-control" accept="image/*" value="">
     </div>
 
-    <input href="?action=gestionVehicule" type="submit" name="addVehicle" class="btn btn-primary mt-2" value="Enregistrer">
+    <input type="submit" name="<?php if(isset($vehicule)) {echo "modifyVehicle";} else {echo "addVehicle";} ?>" class="btn btn-primary mt-2" value="Enregistrer">
 </form>
 
 <?php 

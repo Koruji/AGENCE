@@ -28,9 +28,9 @@ class VehicleModel extends ModelGeneric {
     }
 
     //trouver un véhicule par son id (peut être utile plus tard)
-    public function findVehicleById($id_vehicule) {
-        $query = $this->executeRequest("SELECT * FROM vehicule WHERE id_vehicule = : id_vehicule", [
-            "id_vehicule"=> $id_vehicule,
+    public function findVehicleById(int $id_vehicule) {
+        $query = $this->executeRequest("SELECT * FROM vehicule WHERE id_vehicule = :id_vehicule", [
+            "id_vehicule" => $id_vehicule,
         ]);
         extract($query->fetch());
 
@@ -41,5 +41,20 @@ class VehicleModel extends ModelGeneric {
     public function deleteVehicle($id_vehicule) {
         $query = "DELETE FROM vehicule WHERE id_vehicule = :id_vehicule";
         $this->executeRequest($query, ["id_vehicule"=> $id_vehicule,]);
+    }
+
+    //modifier un véhicule existant
+    public function modifyVehicle(Vehicle $vehicle) {
+        $query = "UPDATE vehicule SET marque = :marque, modele = :modele, matricule = :matricule, prix_journalier = :prix_journalier, type_vehicule = :type_vehicule, statut_dispo = :statut_dispo, photo = :photo WHERE id_vehicule = :id_vehicule";
+        $this->executeRequest($query, [
+            "id_vehicule" => $vehicle->getIdVehicule(),
+            "marque" => $vehicle->getMarque(),
+            "modele" => $vehicle->getModele(),
+            "matricule" => $vehicle->getMatricule(),
+            "prix_journalier" => $vehicle->getPrixJournalier(),
+            "type_vehicule" => $vehicle->getTypeVehicule(),
+            "statut_dispo" => $vehicle->getStatutDispo(),
+            "photo" => $vehicle->getPhoto(),
+        ]);
     }
 }

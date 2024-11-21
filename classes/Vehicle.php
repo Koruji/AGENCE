@@ -10,7 +10,7 @@ class Vehicle {
     private $statut_dispo;
     private $photo;
 
-    public function __construct($p_id_vehicule, $p_marque, $p_modele, $p_matricule, $p_prix_journalier, $p_type_vehicule, $p_statut_dispo, $p_photo) {
+    public function __construct($p_id_vehicule = '', $p_marque = '', $p_modele = '', $p_matricule = '', $p_prix_journalier = '', $p_type_vehicule = '', $p_statut_dispo = '', $p_photo = '') {
         $this->id_vehicule = $p_id_vehicule;
         $this->marque = $p_marque;
         $this->modele = $p_modele;

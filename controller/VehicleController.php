@@ -12,6 +12,22 @@ class VehicleController {
                 header("location: ?action=gestionVehicule");
                 exit;
             }
+            else if(isset($_POST["modifyVehicle"])) {
+                extract($_POST);
+                $modifyVehicule = new Vehicle();
+                $modifyVehicule->setIdVehicule(unserialize($_SESSION['sauvVehicule']));
+                $modifyVehicule->setMarque($marque);
+                $modifyVehicule->setModele($modele);
+                $modifyVehicule->setMatricule($matricule);
+                $modifyVehicule->setPrixJournalier($prix_journalier);
+                $modifyVehicule->setTypeVehicule($type_vehicule);
+                $modifyVehicule->setStatutDispo($statut_dispo);
+                $modifyVehicule->setPhoto("");
+          ;
+                $vehicleModel->modifyVehicle($modifyVehicule);
+                header("location: ?action=gestionVehicule");
+                exit;
+            }
         } else {
             if(isset($_GET['action'])) {
                 $action = $_GET['action'];
@@ -30,9 +46,10 @@ class VehicleController {
                         exit;
                     case "modifierVehicule" : 
                         $id = $_GET['id'];
-                        $vehiculeParId = $vehicleModel->findVehicleById($id);
-                        header("location: ?action=ajouterVehicule");
-                        exit;
+                        $vehicule = $vehicleModel->findVehicleById($id);
+                        $_SESSION['sauvVehicule'] = serialize($vehicule->getIdVehicule());
+                        include "vue/formVehicle.php";
+                        break;
                 }
             }
         }
