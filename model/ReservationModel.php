@@ -44,7 +44,7 @@ class ReservationModel extends ModelGeneric {
     }
 
     //pour récupérer toutes les réservations d'un compte client
-    public function findAllReservation($idPersonne) {
+    public function findAllReservationByAccount($idPersonne) {
         $statement = $this->executeRequest("SELECT * FROM reservation WHERE id_personne = :id_personne", [
             "id_personne" => $idPersonne,
         ]);
@@ -94,6 +94,18 @@ class ReservationModel extends ModelGeneric {
         $prixJournalier = (int) $modelVehicule->findVehicleById($id_vehicule)->getPrixJournalier();
         
         return $facteur * $prixJournalier;
+    }
+
+    //trouver toutes les réservations du site
+    public function findAllReservation() {
+        $statement = $this->executeRequest("SELECT * FROM reservation");
+        $reservation = [];
+
+        while($r = $statement->fetch()){
+            extract($r);
+            $reservation[] = new Reservation($id_vehicule, $id_personne, $id_reservation, $date_reservation, $date_debut, $date_fin, $prix_total);
+        }
+        return $reservation;
     }
 
 }

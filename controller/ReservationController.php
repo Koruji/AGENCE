@@ -5,7 +5,7 @@ class ReservationController {
     public function actionReservation() {
         $reservationModel = new ReservationModel();
         $idPersonne = "";
-        $idVehicule = "";
+        $idVehicule = ""; 
 
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
             if(isset($_POST['addReservation'])) { 
@@ -31,15 +31,16 @@ class ReservationController {
                     case "reservation":
                         if(isset($_GET['message'])) {
                             $erreur = $_GET['message'];
-                        };
+                        }
                         if(isset($_GET['idPersonne']) || isset($_GET['idVehicle'])) {
                             $idPersonne = $_GET['idPersonne'];
                             $idVehicule = $_GET['idVehicle'];
                             $_SESSION['idPersonne'] = serialize($idPersonne);
                             $_SESSION['idVehicule'] = serialize($idVehicule);   
-                        }        
+                        }
+                        //TODO: voir le problème de récupération du véhicule
                         $vehicule = new VehicleModel();
-                        $dataVehicule = $vehicule->findVehicleById( unserialize($_SESSION['idVehicule']) );
+                        $dataVehicule = $vehicule->findVehicleById( unserialize($_SESSION['idVehicule']) );        
                         include "vue/formReservation.php";
                         break;
                     case "deleteResa":
@@ -48,6 +49,15 @@ class ReservationController {
                         $reservationModel->deleteReservation($reservationModel->findReservationById($id));
                         
                         header("location: ?action=menuClient");
+                        exit;
+
+                    case "gestionReservation": 
+                        $reservations = $reservationModel->findAllReservation();
+                        include "vue/manageReservation.php";
+                        break;
+                    
+                    case "addReservation":
+                        header("location: ?action=reservation");
                         exit;
                 }
             } 

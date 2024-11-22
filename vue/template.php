@@ -36,7 +36,7 @@ require_once 'classes/Account.php';  // Inclure la classe Account
                         <a href="?action=gestionClients" class="nav-link text-dark" style="background-color: white; border-radius: 10px;">Gérer les utilisateurs</a>
                     </li>
                     <li class="nav-item">
-                        <a href="" class="nav-link text-dark" style="background-color: white; border-radius: 10px;">Gérer les réservations</a>
+                        <a href="?action=gestionReservation" class="nav-link text-dark" style="background-color: white; border-radius: 10px;">Gérer les réservations</a>
                     </li>
                 <?php endif; ?>
 
