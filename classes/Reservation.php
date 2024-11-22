@@ -66,5 +66,20 @@ class Reservation {
         $this->id_personne = $id_personne;
     }
 
+    //---------------------------------------------------------------METHODES 
+    //pour formater les dates de réservations
+    public function modifyDate($date) {
+        $formater = new IntlDateFormatter(
+            'fr_FR',
+            IntlDateFormatter::LONG,
+            IntlDateFormatter::NONE
+        );
+
+        $timestamp = strtotime($date);
+        $dateFormater = $formater->format($timestamp);
+
+        return $dateFormater;
+    }
+
 
 }

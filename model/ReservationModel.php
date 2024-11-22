@@ -41,4 +41,5 @@ class ReservationModel extends ModelGeneric {
         }
         return $reservations;
     }
+
 }

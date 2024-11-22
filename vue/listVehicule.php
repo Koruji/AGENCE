@@ -28,7 +28,7 @@
                 <td> <?= $vehicule->getPhoto() ?> </td>
                 <td> <?= $vehicule->getMarque() ?> </td>
                 <td> <?= $vehicule->getModele() ?> </td>
-                <td> <?= $vehicule->getPrixJournalier() ?> </td>
+                <td> <?= $vehicule->getPrixJournalier() ?> &euro; </td>
                 <td> <?= $vehicule->getTypeVehicule() ?> </td>
                 <td>Disponible</td>
 

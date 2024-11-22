@@ -9,9 +9,9 @@
         <table class="">
             <?php foreach($reservationClient as $reservation): ?>
                 <tr>
-                    <th><?= $reservation->getDateDebut() ?></th>
-                    <th><?= $reservation->getDateFin() ?></th>                    
-                    <th><?= $reservation->getIdVehicule() ?></th>
+                    <th>Du <?= $reservation->modifyDate($reservation->getDateDebut())  ?></th>
+                    <th>au <?= $reservation->modifyDate($reservation->getDateFin()) ?></th>                    
+                    <th>avec <?= $reservation->getIdVehicule() ?></th>
                     <th>Supprimer</th>
                 </tr>
             <?php endforeach; ?>

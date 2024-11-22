@@ -35,6 +35,8 @@ class ReservationController {
                             $_SESSION['idPersonne'] = serialize($idPersonne);
                             $_SESSION['idVehicule'] = serialize($idVehicule);   
                         }        
+                        $vehicule = new VehicleModel();
+                        $dataVehicule = $vehicule->findVehicleById( unserialize($_SESSION['idVehicule']) );
                         include "vue/formReservation.php";
                         break;
                 }

@@ -20,17 +20,26 @@
         <input type="date" id="date_fin" name="date_fin" class="form-control" required>
     </div>
 
-    <!--
-    <div class="form-group">
-        <label for="id_vehicule">ID Véhicule :</label>
-        <input type="number" id="id_vehicule" name="id_vehicule" class="form-control" required>
+    <div class="mt-3">
+        <p>Prix total : <strong class="text-success"> <?= $dataVehicule->getPrixJournalier()?> &euro; </strong></p> 
     </div>
 
-    <div class="form-group">
-        <label for="id_personne">ID Personne :</label>
-        <input type="number" id="id_personne" name="id_personne" class="form-control" required>
+    <div class="mt-3">
+        <p>Véhicule choisi : <strong class="text-info-emphasis"> <?= $dataVehicule->getModele()?> (<?= $dataVehicule->getTypeVehicule()?>) </strong></p>
     </div>
-    -->
+
+    <?php if(unserialize($_SESSION['user'])->getRole() === "ADMIN"):?>
+        <div class="form-group">
+            <label for="id_vehicule">ID Véhicule :</label>
+            <input type="number" id="id_vehicule" name="id_vehicule" class="form-control" required>
+        </div>
+
+        <div class="form-group">
+            <label for="id_personne">ID Personne :</label>
+            <input type="number" id="id_personne" name="id_personne" class="form-control" required>
+        </div>
+    <?php endif; ?>
+
     <input id="addReservation" name="addReservation" type="submit" class="btn btn-primary mt-2" value="Enregistrer">
 </form>
 
