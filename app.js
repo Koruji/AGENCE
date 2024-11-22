@@ -88,9 +88,6 @@ document.addEventListener("DOMContentLoaded", function() {
     let boutonConfirmerCompte = document.querySelectorAll(".accountSuppr");
     let boutonConfirmerVehicule = document.querySelectorAll(".vehicleSuppr");
     let boutonAnnulerResa = document.querySelectorAll(".resaSuppr");
-    console.log(boutonConfirmerCompte);
-    console.log(boutonConfirmerVehicule);
-    console.log(boutonAnnulerResa);
     
     if(boutonConfirmerCompte) {
         boutonConfirmerCompte.forEach(function(bouton) {

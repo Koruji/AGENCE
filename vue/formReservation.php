@@ -21,7 +21,7 @@
     </div>
 
     <div class="mt-3">
-        <p>Prix total : <strong class="text-success"> <?= $dataVehicule->getPrixJournalier()?> &euro; </strong></p> 
+        <p>Prix total : <strong class="text-success"> <?= $dataVehicule->getPrixJournalier()?> &euro; </strong> / jour</p> 
     </div>
 
     <div class="mt-3">

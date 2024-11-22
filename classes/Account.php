@@ -121,7 +121,7 @@ class Account {
 
     //----------------------------------------------METHODES
     public function addMontantDepense($montantDepense){
-        $this->depenses += ($montantDepense);
+        $this->depenses += $montantDepense;
     }
 
     public function deleteMontantDepense($montantDepense){

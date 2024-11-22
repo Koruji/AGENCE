@@ -15,7 +15,7 @@ class ReservationController {
                 
                 $retourConflit = $reservationModel->checkReservation($idVehicule, $date_debut, $date_fin);
                 if($retourConflit === "") {
-                    $newReservation = new Reservation($idVehicule, $idPersonne, 0, null, $date_debut, $date_fin);
+                    $newReservation = new Reservation($idVehicule, $idPersonne, 0, null, $date_debut, $date_fin, 0);
                     $reservationModel->addReservation($newReservation);
                     header("location: ?action=listVehicle");
                     exit;
@@ -43,7 +43,10 @@ class ReservationController {
                         include "vue/formReservation.php";
                         break;
                     case "deleteResa":
-                        $reservationModel->deleteReservation(unserialize($_SESSION['idPersonne']), unserialize($_SESSION['idVehicule']));
+                        $id = $_GET['id'];
+                        var_dump($reservationModel->findReservationById($id));
+                        $reservationModel->deleteReservation($reservationModel->findReservationById($id));
+                        
                         header("location: ?action=menuClient");
                         exit;
                 }
