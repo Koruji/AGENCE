@@ -10,6 +10,19 @@ class ReservationModel extends ModelGeneric {
             "id_vehicule" => $reservation->getIdVehicule(),
             "id_personne" => $reservation->getIdPersonne(),
         ]);
+
+        $this->addReservationPrice($reservation->getIdPersonne(), $reservation->getIdVehicule());
+    }
+
+    //pour supprimer une réservation 
+    public function deleteReservation($id_personne, $id_vehicule) {
+        $query = "DELETE FROM reservation WHERE id_personne = :id_personne AND id_vehicule = :id_vehicule";
+        $this->executeRequest($query, [
+            "id_vehicule" => $id_vehicule,
+            "id_personne" => $id_personne,
+        ]);
+
+        $this->deleteReservationPrice($id_personne, $id_vehicule);
     }
     
     //pour vérifier si la plage de jour donné n'est pas déjà réservé
@@ -40,6 +53,30 @@ class ReservationModel extends ModelGeneric {
             $reservations[] = new Reservation($id_vehicule, $id_personne, $id_reservation, $date_reservation, $date_debut, $date_fin);
         }
         return $reservations;
+    }
+
+    //pour ajouter le montant de la réservation aux dépenses du client
+    public function addReservationPrice($id_personne, $id_vehicule) {
+        $modelAccount = new AccountModel();
+        $modelVehicule = new VehicleModel();
+
+        $personne = $modelAccount->findAccountById($id_personne);
+        $vehicule = $modelVehicule->findVehicleById($id_vehicule);
+
+        $personne->addMontantDepense((int) $vehicule->getPrixJournalier());
+        $modelAccount->updateDepenses($personne);
+    }
+
+    //pour supprimer le montant de la réservation aux dépenses du client
+    public function deleteReservationPrice($id_personne, $id_vehicule) {
+        $modelAccount = new AccountModel();
+        $modelVehicule = new VehicleModel();
+
+        $personne = $modelAccount->findAccountById($id_personne);
+        $vehicule = $modelVehicule->findVehicleById($id_vehicule);
+
+        $personne->deleteMontantDepense((int) $vehicule->getPrixJournalier());
+        $modelAccount->updateDepenses($personne);
     }
 
 }

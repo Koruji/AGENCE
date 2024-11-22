@@ -13,7 +13,7 @@ class AccountModel extends ModelGeneric {
         if ($erreur) {
             return "Login déjà utilisé.";
         } else {
-            $query = "INSERT INTO personne VALUES (NULL, :civilite, :prenom, :nom, :login, :email, 'CLIENT', now(), :tel, :mdp)";
+            $query = "INSERT INTO personne VALUES (NULL, :civilite, :prenom, :nom, :login, :email, 'CLIENT', now(), :tel, :mdp, :depenses)";
             $this->executeRequest($query, [
                 "civilite" => $newAccount->getCivilite(),
                 "prenom" => $newAccount->getPrenom(),
@@ -22,6 +22,7 @@ class AccountModel extends ModelGeneric {
                 "email" => $newAccount->getEmail(),
                 "tel" => $newAccount->getTel(),
                 "mdp" => password_hash($newAccount->getMdp(), PASSWORD_DEFAULT),
+                "depenses" => $newAccount->getDepenses(),
             ]);
             $lastId = $this->pdo->lastInsertId();
 
@@ -47,7 +48,7 @@ class AccountModel extends ModelGeneric {
             //test sur le mdp
             if(password_verify($mdp, $resultat["mdp"])){
                 extract($resultat);
-                $account = new Account($id_personne, $civilite, $prenom, $nom, $login, $email, $role, $date_inscription, $tel, $mdp);
+                $account = new Account($id_personne, $civilite, $prenom, $nom, $login, $email, $role, $date_inscription, $tel, $mdp, $depenses);
                 $_SESSION['user'] = serialize($account);
 
                 return $_SESSION['user'];
@@ -60,7 +61,7 @@ class AccountModel extends ModelGeneric {
         $query = $this->executeRequest("SELECT * FROM personne WHERE id_personne = :id", ["id" => $id]);
         extract($query->fetch());
 
-        return new Account($id_personne, $civilite, $prenom, $nom, $login, $email, $role, $date_inscription, $tel, $mdp);
+        return new Account($id_personne, $civilite, $prenom, $nom, $login, $email, $role, $date_inscription, $tel, $mdp, $depenses);
     }
 
     //méthode pour trouver tous les comptes CLIENTS
@@ -72,7 +73,7 @@ class AccountModel extends ModelGeneric {
 
         while($c = $query->fetch()){
             extract($c);
-            $clients[] = new Account($id_personne, $civilite, $prenom, $nom, $login, $email, $role, $date_inscription, $tel, $mdp);
+            $clients[] = new Account($id_personne, $civilite, $prenom, $nom, $login, $email, $role, $date_inscription, $tel, $mdp, $depenses);
         }
         return $clients;
     }
@@ -84,7 +85,7 @@ class AccountModel extends ModelGeneric {
 
         while($c = $statement->fetch()){
             extract($c);
-            $personnes[] = new Account($id_personne, $civilite, $prenom, $nom, $login, $email, $role, $date_inscription, $tel, $mdp);
+            $personnes[] = new Account($id_personne, $civilite, $prenom, $nom, $login, $email, $role, $date_inscription, $tel, $mdp, $depenses);
         }
         return $personnes;
     }
@@ -107,6 +108,16 @@ class AccountModel extends ModelGeneric {
             "email" => $account->getEmail(),
             "role" => $account->getRole(),
             "tel" => $account->getTel(),
+            "depenses" => $account->getDepenses(),
         ]);
+    }
+
+    public function updateDepenses(Account $account) {
+        $query = "UPDATE personne SET depenses = :depenses WHERE id_personne = :id_personne";
+        $this->executeRequest($query, [
+            "id_personne" => $account->getIdPersonne(),
+            "depenses" => $account->getDepenses(),
+        ]);
+        
     }
 }

@@ -27,7 +27,7 @@ class AccountController {
 
                 if($_SESSION['user'] === null) {
                     $newAccount = new Account(0, $civilite, $prenom, $nom, $login,
-                $email, "CLIENT", null, $tel, $mdp);
+                $email, "CLIENT", null, $tel, $mdp, 0);
                 
                     $retourConflit = $accountModel->addAccount($newAccount);
                     if($retourConflit === "") {
@@ -40,7 +40,7 @@ class AccountController {
                 }
                 else {
                     $newAccount = new Account(0, $civilite, $prenom, $nom, $login,
-                $email, "CLIENT", null, $tel, $mdp);
+                $email, "CLIENT", null, $tel, $mdp, 0);
                 
                     $accountModel->addAccount($newAccount);
                     header("location: ?action=gestionClients");
@@ -54,7 +54,6 @@ class AccountController {
                 $compteSauv = unserialize($_SESSION['compteSauv']);
 
                 $modifyAccount->setIdPersonne($compteSauv->getIdPersonne());
-                var_dump($compteSauv->getIdPersonne()); ////
                 $modifyAccount->setCivilite($civilite);
                 $modifyAccount->setPrenom($prenom);
                 $modifyAccount->setLogin($login);
@@ -64,6 +63,7 @@ class AccountController {
                 $modifyAccount->setDateInscription(null);
                 $modifyAccount->setTel($tel);
                 $modifyAccount->setMdp($compteSauv->getMdp());
+                $modifyAccount->setDepenses($depenses);
 
                 $accountModel->updateAccount($modifyAccount);
 

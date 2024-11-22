@@ -9,10 +9,10 @@
         <table class="">
             <?php foreach($reservationClient as $reservation): ?>
                 <tr>
-                    <th>Du <?= $reservation->modifyDate($reservation->getDateDebut())  ?></th>
-                    <th>au <?= $reservation->modifyDate($reservation->getDateFin()) ?></th>                    
+                    <th>Du <?= $reservation->modifyDate($reservation->getDateDebut())  ?>
+                        au <?= $reservation->modifyDate($reservation->getDateFin()) ?></th>                    
                     <th>avec <?= $reservation->getIdVehicule() ?></th>
-                    <th>Supprimer</th>
+                    <th><a href="?action=deleteResa" class="btn btn-danger mt-2 resaSuppr">Annuler</th>
                 </tr>
             <?php endforeach; ?>
         </table>
@@ -30,8 +30,8 @@
             <h5 class="text-center">
                 Montant total des réservations
             </h5>
-            <p>
-                Implémenter les dépenses clients sur le site.
+            <p class="text-center display-1 m-0">
+                <strong class="text-success"> <?php echo $depense;?> &euro;
             </p>
         </div>
     </div>

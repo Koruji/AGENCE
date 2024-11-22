@@ -11,9 +11,10 @@ class Account {
     private $date_inscription;
     private $tel;
     private $mdp;
+    private $depenses;
 
     public function __construct($p_id_personne = '', $p_civilite = '', $p_prenom = '', $p_nom = '', $p_login = '', $p_email = '', $p_role = '', 
-        $p_date_inscription = '', $p_tel = '', $p_mdp = '') 
+        $p_date_inscription = '', $p_tel = '', $p_mdp = '', $p_depenses = 0) 
     {
             $this->id_personne = $p_id_personne;
             $this->civilite = $p_civilite;
@@ -25,6 +26,7 @@ class Account {
             $this->date_inscription = $p_date_inscription;
             $this->tel = $p_tel;
             $this->mdp = $p_mdp;
+            $this->depenses = $p_depenses;
     }
 
     //--------------------------------------------------------GETTER
@@ -68,6 +70,10 @@ class Account {
         return $this->mdp;
     }
 
+    public function getDepenses(){
+        return $this->depenses;
+    }
+
     //------------------------------------------------------------SETTER
     public function setIdPersonne($id_personne){
         $this->id_personne = $id_personne;
@@ -108,5 +114,18 @@ class Account {
     public function setMdp($mdp){
         $this->mdp = $mdp;
     }
+
+    public function setDepenses($depenses){
+        $this->depenses = $depenses;
+    }
+
+    //----------------------------------------------METHODES
+    public function addMontantDepense($montantDepense){
+        $this->depenses += ($montantDepense);
+    }
+
+    public function deleteMontantDepense($montantDepense){
+        $this->depenses -= $montantDepense;
+    }   
 
 }

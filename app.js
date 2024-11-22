@@ -87,8 +87,10 @@ document.addEventListener("DOMContentLoaded", function() {
     //---------------------------------------------------------------------------POPUP
     let boutonConfirmerCompte = document.querySelectorAll(".accountSuppr");
     let boutonConfirmerVehicule = document.querySelectorAll(".vehicleSuppr");
+    let boutonAnnulerResa = document.querySelectorAll(".resaSuppr");
     console.log(boutonConfirmerCompte);
     console.log(boutonConfirmerVehicule);
+    console.log(boutonAnnulerResa);
     
     if(boutonConfirmerCompte) {
         boutonConfirmerCompte.forEach(function(bouton) {
@@ -109,6 +111,19 @@ document.addEventListener("DOMContentLoaded", function() {
                 event.preventDefault();
                 let userResponseV = confirm("Voulez-vous supprimer ce véhicule ?");
                 if(userResponseV) {
+                    window.location.href = this.href;
+                } else {
+                    event.preventDefault();
+                }
+            });
+        });
+    }
+    if(boutonAnnulerResa) {
+        boutonAnnulerResa.forEach(function(annuler) {
+            annuler.addEventListener("click", function(event) {
+                event.preventDefault();
+                let demande = confirm("Voulez-vous supprimer cette réservation ?");
+                if(demande) {
                     window.location.href = this.href;
                 } else {
                     event.preventDefault();

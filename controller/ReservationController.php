@@ -10,9 +10,12 @@ class ReservationController {
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
             if(isset($_POST['addReservation'])) { 
                 extract($_POST);
-                $retourConflit = $reservationModel->checkReservation(unserialize($_SESSION['idVehicule']), $date_debut, $date_fin);
+                $idPersonne = unserialize($_SESSION['idPersonne']);
+                $idVehicule = unserialize($_SESSION['idVehicule']);
+                
+                $retourConflit = $reservationModel->checkReservation($idVehicule, $date_debut, $date_fin);
                 if($retourConflit === "") {
-                    $newReservation = new Reservation(unserialize($_SESSION['idVehicule']), unserialize($_SESSION['idPersonne']), 0, null, $date_debut, $date_fin);
+                    $newReservation = new Reservation($idVehicule, $idPersonne, 0, null, $date_debut, $date_fin);
                     $reservationModel->addReservation($newReservation);
                     header("location: ?action=listVehicle");
                     exit;
@@ -39,6 +42,10 @@ class ReservationController {
                         $dataVehicule = $vehicule->findVehicleById( unserialize($_SESSION['idVehicule']) );
                         include "vue/formReservation.php";
                         break;
+                    case "deleteResa":
+                        $reservationModel->deleteReservation(unserialize($_SESSION['idPersonne']), unserialize($_SESSION['idVehicule']));
+                        header("location: ?action=menuClient");
+                        exit;
                 }
             } 
         }
