@@ -21,21 +21,21 @@
             <h3>Nouveau ?</h3>
             <p>
                 Accéder au service de location de &copy; Rent - a - Car en toute simplicité
-                en vous créant un compte.
+                en créant un compte.
             </p>
             <a href="?action=createAccount" class="btn btn-primary mt-2">Créer un compte</a>
         </div>
     </div>
 </form>
-<div class="flex-grow-2 bg-light rounded p-3 d-flex flex-column mt-3">
+<div class="flex-grow-2 bg-light rounded p-3 d-flex flex-column mt-3 shadow-sm">
     <h5 class="text-center">
         Véhicules disponibles
     </h5>
     <p>
-        Envie de louer un véhicule ? 
+        Envie de louer un véhicule ?
         Regardez notre sélection disponible à la location.
     </p>
-    <a href="" class="btn btn-primary mt-2">OK</a>
+    <a href="?action=listVehicle" class="btn btn-primary mt-2">Regarder les offres</a>
 </div>
 
 <?php 

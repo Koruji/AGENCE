@@ -4,6 +4,7 @@
 ?>
 
 <h6 id="messageErreur"></h6>
+<h6 class="text-danger"><?php if(isset($messageErreurLogin)) { echo '<i class="bi bi-exclamation-triangle-fill"></i> ' . htmlspecialchars($messageErreurLogin);} ?></h6>
 
 <form action="" id="inscription_form" method="POST" class="p-4 bg-light rounded shadow-sm">
     <div class="form-group">

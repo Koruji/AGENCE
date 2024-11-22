@@ -1,15 +1,16 @@
 <?php ob_start(); ?>
 
+<h4 class="mb-3 text-center">Bonjour <?= unserialize($_SESSION['user'])->getPrenom() ?> ! <i class="bi bi-sun-fill text-warning"></i></h4>
 <div class="container vh-100 d-flex">
-    <div class="w-50 bg-light rounded p-3 me-3 d-flex flex-column">
+    <div class="w-50 bg-light rounded p-3 me-3 d-flex flex-column shadow-sm">
         <h5 class="text-center">
             Mes réservations
         </h5>
-        <table class="table">
+        <table class="">
             <?php foreach($reservationClient as $reservation): ?>
                 <tr>
                     <th><?= $reservation->getDateDebut() ?></th>
-                    <th><?= $reservation->getDateFin() ?></th>
+                    <th><?= $reservation->getDateFin() ?></th>                    
                     <th><?= $reservation->getIdVehicule() ?></th>
                     <th>Supprimer</th>
                 </tr>
@@ -18,22 +19,20 @@
     </div>
 
     <div class="w-50 d-flex flex-column">
-        <div class="flex-grow-1 bg-light rounded p-3 mb-3 d-flex flex-column">
+        <div class="flex-fill bg-light rounded p-3 mb-3 d-flex flex-column shadow-sm">
             <h5 class="text-center">
                 Mes évaluations
             </h5>
             <p> A compléter avec les évaluations déjà mise !</p>
         </div>
 
-        <div class="flex-grow-2 bg-light rounded p-3 d-flex flex-column">
+        <div class="flex-fill bg-light rounded p-3 mb-3 d-flex flex-column shadow-sm">
             <h5 class="text-center">
-                Véhicules disponibles
+                Montant total des réservations
             </h5>
             <p>
-                Envie de louer un véhicule ? 
-                Regardez notre sélection disponible à la location.
+                Implémenter les dépenses clients sur le site.
             </p>
-            <a href="" class="btn btn-primary mt-2">OK</a>
         </div>
     </div>
 </div>

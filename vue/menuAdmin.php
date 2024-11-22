@@ -1,5 +1,6 @@
 <?php ob_start(); ?>
 
+<h4 class="mb-3 text-center">Bonjour <?= unserialize($_SESSION['user'])->getPrenom() ?> ! <i class="bi bi-sun-fill text-warning"></i></h4>
 <div class="container vh-100 d-flex">
     <div class="w-50 bg-light rounded p-3 me-3 d-flex flex-column">
         <h5 class="text-center">

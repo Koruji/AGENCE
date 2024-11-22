@@ -5,22 +5,34 @@ class AccountModel extends ModelGeneric {
 
     //méthode pour ajouter un compte à la BD
     public function addAccount(Account $newAccount){
-        $query = "INSERT INTO personne VALUES (NULL, :civilite, :prenom, :nom, :login, :email, 'CLIENT', now(), :tel, :mdp)";
-        $this->executeRequest($query, [
-            "civilite" => $newAccount->getCivilite(),
-            "prenom" => $newAccount->getPrenom(),
-            "nom" => $newAccount->getNom(),
+        $verificationLogin = "SELECT * FROM personne WHERE login = :login";
+        $erreur = $this->executeRequest($verificationLogin, [
             "login" => $newAccount->getLogin(),
-            "email" => $newAccount->getEmail(),
-            "tel" => $newAccount->getTel(),
-            "mdp" => password_hash($newAccount->getMdp(), PASSWORD_DEFAULT),
-        ]);
-        $lastId = $this->pdo->lastInsertId();
+        ])->rowCount() > 0;
 
-        //on associe directement la session au nouvel utilisateur de créé si l'admin n'est pas connecté
-        if($_SESSION['user'] === null) {
-            $_SESSION['user'] = serialize($this->findAccountById($lastId));
+        if ($erreur) {
+            return "Login déjà utilisé.";
+        } else {
+            $query = "INSERT INTO personne VALUES (NULL, :civilite, :prenom, :nom, :login, :email, 'CLIENT', now(), :tel, :mdp)";
+            $this->executeRequest($query, [
+                "civilite" => $newAccount->getCivilite(),
+                "prenom" => $newAccount->getPrenom(),
+                "nom" => $newAccount->getNom(),
+                "login" => $newAccount->getLogin(),
+                "email" => $newAccount->getEmail(),
+                "tel" => $newAccount->getTel(),
+                "mdp" => password_hash($newAccount->getMdp(), PASSWORD_DEFAULT),
+            ]);
+            $lastId = $this->pdo->lastInsertId();
+
+            //on associe directement la session au nouvel utilisateur de créé si l'admin n'est pas connecté
+            if($_SESSION['user'] === null) {
+                $_SESSION['user'] = serialize($this->findAccountById($lastId));
+            }
+            return "";
         }
+
+        
     }
 
     //méthode pour vérifier et se connecter avec un compte existant

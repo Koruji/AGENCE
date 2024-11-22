@@ -1,7 +1,14 @@
 <?php ob_start(); ?>
+    
+<?php if(!isset($_SESSION['user'])) : ?>
+    <div>
+        <p>Un de nos véhicules vous plaît ? Créez un compte pour réserver dès maintenant.</p>
+        <a href="?action=createAccount" class="btn btn-primary mt-2">Créer un compte</a>
+    </div>
+<?php endif; ?> 
 
 <div>
-    <a href="?action=ajouterVehicule" class="btn btn-primary mt-2">Rechercher un véhicule</a>
+    <a href="" class="btn btn-primary mt-2">Rechercher un véhicule</a>
     <p>barre de recherche</p>
 </div>
 
@@ -24,9 +31,12 @@
                 <td> <?= $vehicule->getPrixJournalier() ?> </td>
                 <td> <?= $vehicule->getTypeVehicule() ?> </td>
                 <td>Disponible</td>
+
+                <?php if(isset($_SESSION['user'])) : ?>
                 <td>
                     <a href="?action=reservation&idVehicle=<?= $vehicule->getIdVehicule()?>&idPersonne=<?= unserialize($_SESSION['user'])->getIdPersonne()?>">Réserver</a>
                 </td>
+                <?php endif; ?>
                 
             </tr>
         <?php endforeach; ?>

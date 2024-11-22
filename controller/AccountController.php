@@ -29,9 +29,14 @@ class AccountController {
                     $newAccount = new Account(0, $civilite, $prenom, $nom, $login,
                 $email, "CLIENT", null, $tel, $mdp);
                 
-                    $accountModel->addAccount($newAccount);
-                    header("location: ?action=menuClient");
-                    exit;
+                    $retourConflit = $accountModel->addAccount($newAccount);
+                    if($retourConflit === "") {
+                        header("location: ?action=menuClient");
+                        exit;
+                    } else {
+                        header("location: ?action=createAccount&message=" . $retourConflit);
+                        exit;
+                    }      
                 }
                 else {
                     $newAccount = new Account(0, $civilite, $prenom, $nom, $login,
@@ -75,6 +80,9 @@ class AccountController {
                         header("location: .");
                         exit;
                     case "createAccount":
+                        if(isset($_GET['message'])) {
+                            $messageErreurLogin = $_GET['message'];
+                        }  
                         include "vue/formAccount.php";
                         break;
                     case "gestionClients": 
@@ -91,7 +99,7 @@ class AccountController {
                         $id = $_GET['id'];
                         $accountModel->deleteAccount($id);
                         header("location: ?action=gestionClients");
-                        exit;          
+                        exit;    
                 }
             }
         }
