@@ -44,8 +44,8 @@ class ReservationModel extends ModelGeneric {
     }
 
     //pour récupérer toutes les réservations d'un compte client
-    public function findAllReservationByAccount($idPersonne) {
-        $statement = $this->executeRequest("SELECT * FROM reservation WHERE id_personne = :id_personne", [
+    public function findAllActiveReservationByAccount($idPersonne) {
+        $statement = $this->executeRequest("SELECT * FROM reservation WHERE id_personne = :id_personne AND date_fin >= now()", [
             "id_personne" => $idPersonne,
         ]);
         $reservations = [];
@@ -97,8 +97,8 @@ class ReservationModel extends ModelGeneric {
     }
 
     //trouver toutes les réservations du site
-    public function findAllReservation() {
-        $statement = $this->executeRequest("SELECT * FROM reservation");
+    public function findAllReservationActive() {
+        $statement = $this->executeRequest("SELECT * FROM reservation WHERE date_fin >= now()");
         $reservation = [];
 
         while($r = $statement->fetch()){
@@ -124,6 +124,18 @@ class ReservationModel extends ModelGeneric {
             "id_personne" => $reservation->getIdPersonne(),
         ]);
         $this->addReservationPrice($reservation, $nouveauMontant);
+    }
+
+    //pour récupérer les réservations passées 
+    public function findAllPastReservation() {
+        $statement = $this->executeRequest("SELECT * FROM reservation WHERE date_fin < now()");
+        $reservation = [];
+
+        while($r = $statement->fetch()){
+            extract($r);
+            $reservation[] = new Reservation($id_vehicule, $id_personne, $id_reservation, $date_reservation, $date_debut, $date_fin, $prix_total);
+        }
+        return $reservation;
     }
 
 }

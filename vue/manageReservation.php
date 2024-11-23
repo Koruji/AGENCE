@@ -19,8 +19,6 @@
             </tr>
             <?php foreach($reservations as $reservation): ?>
                 <tr>
-                    <!-- TODO: système qui empèche de supprimer la réservation lorsqu'elle est démarré 
-                     + afficher uniquement les résa en cours ou en attente effective (pas les antérieures) -->
                     <td> <?= $reservation->modifyDate($reservation->getDateReservation()) ?> </td>
                     <td> <?= $reservation->modifyDate($reservation->getDateDebut()) ?> </td>
                     <td> <?= $reservation->modifyDate($reservation->getDateFin()) ?> </td>
@@ -36,8 +34,12 @@
                     <td> <?php 
                         echo $vehiculeModel->findVehicleById($reservation->getIdVehicule())->getMatricule();
                     ?></td>
-                    <td><a href="?action=modifyResa&id=<?=$reservation->getIdReservation()?>" class="btn btn-primary mt-2">Modifier</a></td>
-                    <td><a href="?action=deleteResa&id=<?=$reservation->getIdReservation()?>" class="btn btn-danger mt-2 resaSuppr">Supprimer</td>
+                    <?php if($reservation->getDateDebut() > date('Y-m-d')): ?>
+                        <td><a href="?action=modifyResa&id=<?=$reservation->getIdReservation()?>" class="btn btn-primary mt-2">Modifier</a></td>
+                        <td><a href="?action=deleteResa&id=<?=$reservation->getIdReservation()?>" class="btn btn-danger mt-2 resaSuppr">Supprimer</td>
+                    <?php else : ?>
+                        <td><a class="btn btn-primary">En cours...</a></td>
+                    <?php endif; ?>
                 </tr>
             <?php endforeach; ?>
     </table>

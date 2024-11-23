@@ -87,14 +87,6 @@ class ReservationController {
                             }
                             $vehicule = new VehicleModel();
                             $dataVehicule = $vehicule->findVehicleById( unserialize($_SESSION['idVehicule']) );   
-                        } else {
-                            if(isset($_GET['idReservation'])) {
-                                $id = $_GET['idReservation'];
-                                //TODO : pour la modification d'une résa penser à récupérer la réservation actuelle
-                            }  
-                            //pour retourner les listes de vehicules dispo et les clients de la plateforme
-                            $listClients = $clientModel->findClientAccount();
-                            $listVehicules = $vehiculeModel->findAllVehicle();
                         }  
                         if(isset($_GET['message'])) {
                             $erreur = $_GET['message'];
@@ -115,7 +107,7 @@ class ReservationController {
                         }
 
                     case "gestionReservation": 
-                        $reservations = $reservationModel->findAllReservation();
+                        $reservations = $reservationModel->findAllReservationActive();
                         include "vue/manageReservation.php";
                         break;
                     

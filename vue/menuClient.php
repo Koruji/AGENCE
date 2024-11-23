@@ -15,10 +15,12 @@
                         $vehicule = new VehicleModel();
                         echo $vehicule->findVehicleById($reservation->getIdVehicule())->getModele();
                     ?></th>
-                    <!-- TODO: bouton En cours si date du jour correspond à une date de la période +
-                     afficher uniquement les résas en cours ou futures (pas les antérieures) -->
-                     <td><a href="?action=modifyResa&id=<?=$reservation->getIdReservation()?>" class="btn btn-primary mt-2">Modifier</a></td>
-                    <th><a href="?action=deleteResa&id=<?=$reservation->getIdReservation()?>" class="btn btn-danger mt-2 resaSuppr">Annuler</th>
+                    <?php if($reservation->getDateDebut() > date('Y-m-d')): ?>
+                        <th><a href="?action=modifyResa&id=<?=$reservation->getIdReservation()?>" class="btn btn-primary mt-2">Modifier</a></th>
+                        <th><a href="?action=deleteResa&id=<?=$reservation->getIdReservation()?>" class="btn btn-danger mt-2 resaSuppr">Annuler</th>
+                    <?php else : ?>
+                        <th><a class="btn btn-primary">En cours...</a></th>
+                    <?php endif; ?>
                 </tr>
             <?php endforeach; ?>
         </table>
