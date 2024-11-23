@@ -18,6 +18,7 @@ class MenuController {
                 case "menuClient":
                     $idUser = unserialize($_SESSION['user'])->getIdPersonne();
                     $reservationClient = $modelReservation->findAllActiveReservationByAccount($idUser);
+                    $ancienneReservation = $modelReservation->findAllPastReservationByAccount($idUser);
                     $montantDepense = $modelAccount->findAccountById($idUser);
                     $depense = $montantDepense->getDepenses();
                     include "vue/menuClient.php";

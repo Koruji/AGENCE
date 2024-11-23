@@ -126,9 +126,11 @@ class ReservationModel extends ModelGeneric {
         $this->addReservationPrice($reservation, $nouveauMontant);
     }
 
-    //pour récupérer les réservations passées 
-    public function findAllPastReservation() {
-        $statement = $this->executeRequest("SELECT * FROM reservation WHERE date_fin < now()");
+    //pour récupérer les réservations passées du client
+    public function findAllPastReservationByAccount($id_personne) {
+        $statement = $this->executeRequest("SELECT * FROM reservation WHERE id_personne = :id_personne AND date_fin < now()", [
+            "id_personne" => $id_personne,
+        ]);
         $reservation = [];
 
         while($r = $statement->fetch()){
