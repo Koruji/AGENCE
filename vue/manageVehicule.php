@@ -29,7 +29,7 @@
                             if($vehicule->getStatutDispo() === 1) {
                                 echo "Disponible";
                             } else {
-                                echo "Réservé";
+                                echo "Indisponible";
                             }
                         ?> 
                     </td>

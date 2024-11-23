@@ -39,9 +39,20 @@
         <?php if(unserialize($_SESSION['user'])->getRole() === "ADMIN"): ?>
             <div class="form-group">
                 <label for="role">Rôle :</label>
-                <select id="role" name="role" class="form-control" value="<?php if(isset($compte)) { echo $compte->getRole();} ?>">
-                    <option value="CLIENT">Client</option>
-                    <option value="ADMIN">Admin</option>
+                <select id="role" name="role" class="form-control">
+                <?php 
+                    $selectedRole = isset($compte) ? $compte->getRole() : null;
+
+                    $roles = [
+                        "CLIENT" => "Client",
+                        "ADMIN" => "Admin",
+                    ];
+
+                    foreach ($roles as $value => $label) {
+                        $selected = ($value === $selectedRole) ? "selected" : "";
+                        echo "<option value=\"$value\" $selected>$label</option>";
+                    }
+                ?>
                 </select>
             </div>
         <?php endif; ?>

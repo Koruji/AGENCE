@@ -26,17 +26,37 @@
     <div class="form-group">
         <label for="type_vehicule"><span class="text-danger">*</span> Type de Véhicule :</label>
         <select id="type_vehicule" name="type_vehicule" class="form-control">
-            <option value="voiture">Voiture</option>
-            <option value="2_roues">2 roues</option>
-            <option value="camion">Camion</option>
+        <?php 
+            $selectedType = isset($vehicule) ? $vehicule->getTypeVehicule() : null;
+
+            $options = [
+                "voiture" => "Voiture",
+                "2_roues" => "2 roues",
+                "camion" => "Camion",
+            ];
+
+            foreach ($options as $value => $label) {
+                $selected = ($value === $selectedType) ? "selected" : "";
+                echo "<option value=\"$value\" $selected>$label</option>";
+            }
+        ?>
         </select>
     </div>
 
     <div class="form-group">
         <label for="statut_dispo"><span class="text-danger">*</span> Statut Disponibilité :</label>
         <select id="statut_dispo" name="statut_dispo" class="form-control">
-            <option value="1">Disponible</option>
-            <option value="0">Indisponible</option>
+        <?php 
+            $selectedDispo = isset($vehicule) ? $vehicule->getStatutDispo() : null;
+            $options = [
+            "1" => "Disponible",
+            "0" => "Indisponible",
+            ];
+            foreach ($options as $value => $label) {
+                $selected = ($value == $selectedDispo) ? "selected" : "";
+                echo "<option value=\"$value\" $selected>$label</option>";
+            }
+        ?>
         </select>
     </div>
 
