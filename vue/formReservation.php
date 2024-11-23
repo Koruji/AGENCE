@@ -19,28 +19,45 @@
         <label for="date_fin">Date de Fin :</label>
         <input type="date" id="date_fin" name="date_fin" class="form-control" required>
     </div>
-
-    <div class="mt-3">
-        <p>Prix total : <strong class="text-success"> <?= $dataVehicule->getPrixJournalier()?> &euro; </strong> / jour</p> 
-    </div>
-
-    <div class="mt-3">
-        <p>Véhicule choisi : <strong class="text-info-emphasis"> <?= $dataVehicule->getModele()?> (<?= $dataVehicule->getTypeVehicule()?>) </strong></p>
-    </div>
-
-    <?php if(unserialize($_SESSION['user'])->getRole() === "ADMIN"):?>
-        <div class="form-group">
-            <label for="id_vehicule">ID Véhicule :</label>
-            <input type="number" id="id_vehicule" name="id_vehicule" class="form-control" required>
+    <?php if(unserialize($_SESSION['user'])->getRole() === "CLIENT"): ?>
+        <div class="mt-3">
+            <p>Prix total : <strong class="text-success"> <?= $dataVehicule->getPrixJournalier()?> &euro; </strong> / jour</p> 
         </div>
 
-        <div class="form-group">
-            <label for="id_personne">ID Personne :</label>
-            <input type="number" id="id_personne" name="id_personne" class="form-control" required>
+        <div class="mt-3">
+            <p>Véhicule choisi : <strong class="text-info-emphasis"> <?= $dataVehicule->getModele()?> (<?= $dataVehicule->getTypeVehicule()?>) </strong></p>
         </div>
     <?php endif; ?>
 
-    <input id="addReservation" name="addReservation" type="submit" class="btn btn-primary mt-2" value="Enregistrer">
+    <?php if(unserialize($_SESSION['user'])->getRole() === "ADMIN"):?>
+        <div class="form-group mt-3">
+            <label for="id_vehicule">Véhicule :</label>
+            <select name="id_vehicule" id="id_vehicule" required>
+                <?php
+                foreach ($listVehicules as $vehicule) {
+                    $label = $vehicule->getMarque() . " " . $vehicule->getModele() . " (Matricule :" . $vehicule->getMatricule() . ")";
+                    $value = $vehicule->getIdVehicule();
+                    echo "<option value=\"$value\" $selected>$label</option>";
+                }
+                ?>
+            </select>
+        </div>
+
+        <div class="form-group mt-3 mb-3">
+            <label for="id_personne">Client :</label>
+            <select name="id_personne" id="id_personne" required>
+                <?php
+                foreach ($listClients as $client) {
+                    $label = $client->getNom() . " " . $client->getPrenom();
+                    $value = $client->getIdPersonne();
+                    echo "<option value=\"$value\" $selected>$label</option>";
+                }
+                ?>
+            </select>
+        </div>
+    <?php endif; ?>
+
+    <input id="addReservation" name="<?php if(unserialize($_SESSION['user'])->getRole() === "CLIENT") {echo "addReservation";} else {echo "addReservationAdmin";} ?>" type="submit" class="btn btn-primary mt-2" value="Enregistrer">
 </form>
 
 <?php 
