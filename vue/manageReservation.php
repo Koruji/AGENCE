@@ -13,8 +13,9 @@
                 <th>Prix de la réservation</th>
                 <th>Client</th>
                 <th>Modèle de véhicule</th>
-                <th>Matricule du véhicule</th>          
+                <th>Matricule du véhicule</th>    
                 <th>Action</th>
+                <th></th>      
             </tr>
             <?php foreach($reservations as $reservation): ?>
                 <tr>
@@ -35,10 +36,8 @@
                     <td> <?php 
                         echo $vehiculeModel->findVehicleById($reservation->getIdVehicule())->getMatricule();
                     ?></td>
-                    <td>
-                        <a href="" class="btn btn-primary mt-2">Modifier</a>
-                        <a href="" class="btn btn-primary mt-2">Supprimer</a>
-                    </td>
+                    <td><a href="?action=modifyResa&id=<?=$reservation->getIdReservation()?>" class="btn btn-primary mt-2">Modifier</a></td>
+                    <td><a href="?action=deleteResa&id=<?=$reservation->getIdReservation()?>" class="btn btn-danger mt-2 resaSuppr">Supprimer</td>
                 </tr>
             <?php endforeach; ?>
     </table>

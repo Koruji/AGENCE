@@ -17,7 +17,7 @@
                     ?></th>
                     <!-- TODO: bouton En cours si date du jour correspond à une date de la période +
                      afficher uniquement les résas en cours ou futures (pas les antérieures) -->
-                    <th><a href="" class="btn btn-primary mt-2">Modifier</th>
+                     <td><a href="?action=modifyResa&id=<?=$reservation->getIdReservation()?>" class="btn btn-primary mt-2">Modifier</a></td>
                     <th><a href="?action=deleteResa&id=<?=$reservation->getIdReservation()?>" class="btn btn-danger mt-2 resaSuppr">Annuler</th>
                 </tr>
             <?php endforeach; ?>

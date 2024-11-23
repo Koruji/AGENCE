@@ -12,21 +12,23 @@
 
     <div class="form-group">
         <label for="date_debut">Date de Début :</label>
-        <input type="date" id="date_debut" name="date_debut" class="form-control" required>
+        <input type="date" id="date_debut" name="date_debut" class="form-control" value="<?php if(isset($resa)) { echo $resa->getDateDebut();} ?>" required>
     </div>
 
     <div class="form-group">
         <label for="date_fin">Date de Fin :</label>
-        <input type="date" id="date_fin" name="date_fin" class="form-control" required>
+        <input type="date" id="date_fin" name="date_fin" class="form-control" value="<?php if(isset($resa)) { echo $resa->getDateFin();} ?>" required>
     </div>
+
     <?php if(unserialize($_SESSION['user'])->getRole() === "CLIENT"): ?>
+        <?php if(!isset($resa)) : ?>
         <div class="mt-3">
-            <p>Prix total : <strong class="text-success"> <?= $dataVehicule->getPrixJournalier()?> &euro; </strong> / jour</p> 
+            <p>Prix total : <strong class="text-success"> <?php echo $dataVehicule->getPrixJournalier() . "/ jour"; ?> &euro; </strong></p> 
         </div>
 
         <div class="mt-3">
-            <p>Véhicule choisi : <strong class="text-info-emphasis"> <?= $dataVehicule->getModele()?> (<?= $dataVehicule->getTypeVehicule()?>) </strong></p>
-        </div>
+            <p>Véhicule choisi : <strong class="text-info-emphasis"> <?php if(isset($dataVehicule))  { echo $dataVehicule->getModele() . " (" . $dataVehicule->getTypeVehicule() . ")"; }?> </strong></p>
+        </div> <?php endif; ?>
     <?php endif; ?>
 
     <?php if(unserialize($_SESSION['user'])->getRole() === "ADMIN"):?>
@@ -37,6 +39,7 @@
                 foreach ($listVehicules as $vehicule) {
                     $label = $vehicule->getMarque() . " " . $vehicule->getModele() . " (Matricule :" . $vehicule->getMatricule() . ")";
                     $value = $vehicule->getIdVehicule();
+                    if(isset($resa)) { $selected = ($value == $resa->getIdVehicule()) ? 'selected' : ''; }
                     echo "<option value=\"$value\" $selected>$label</option>";
                 }
                 ?>
@@ -50,6 +53,7 @@
                 foreach ($listClients as $client) {
                     $label = $client->getNom() . " " . $client->getPrenom();
                     $value = $client->getIdPersonne();
+                    if(isset($resa)) { $selected = ($value == $resa->getIdPersonne()) ? 'selected' : ''; }
                     echo "<option value=\"$value\" $selected>$label</option>";
                 }
                 ?>
@@ -57,7 +61,7 @@
         </div>
     <?php endif; ?>
 
-    <input id="addReservation" name="<?php if(unserialize($_SESSION['user'])->getRole() === "CLIENT") {echo "addReservation";} else {echo "addReservationAdmin";} ?>" type="submit" class="btn btn-primary mt-2" value="Enregistrer">
+    <input id="addReservation" name="<?php if(unserialize($_SESSION['user'])->getRole() === "CLIENT" && !isset($resa)) {echo "addReservation";} else if(isset($resa)) { echo "modifierReservation"; } else {echo "addReservationAdmin";} ?>" type="submit" class="btn btn-primary mt-2" value="Enregistrer">
 </form>
 
 <?php 

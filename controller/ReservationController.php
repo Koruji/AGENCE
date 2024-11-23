@@ -43,6 +43,35 @@ class ReservationController {
                     exit;
                 }   
             }
+
+            if(isset($_POST["modifierReservation"])) {
+                extract($_POST);
+                $resaSauv = unserialize($_SESSION['reservationSauv']);
+                $reservationModel->deleteReservationPrice($resaSauv);
+                if(unserialize($_SESSION['user'])->getRole() === "ADMIN") {
+                    $modifyResa = new Reservation($id_vehicule, $id_personne);
+                } else {
+                    $modifyResa = new Reservation($resaSauv->getIdVehicule(), unserialize($_SESSION['user'])->getIdPersonne());
+                }
+                
+
+                $modifyResa->setIdReservation($resaSauv->getIdReservation());
+                $modifyResa->setDateReservation(null);
+                $modifyResa->setDateDebut($date_debut);
+                $modifyResa->setDateFin($date_fin);
+                $modifyResa->setPrixTotal($resaSauv->getPrixTotal());
+
+                $reservationModel->updateReservation($modifyResa);
+
+                $_SESSION['reservationSauv'] = null;
+                if(unserialize($_SESSION['user'])->getRole() === "ADMIN") {
+                    header("location: ?action=gestionReservation");
+                    exit;
+                } else {
+                    header("location: ?action=menuClient");
+                    exit;   
+                }
+            }
         } else {
             if(isset($_GET['action'])) {
                 $action = $_GET['action'];
@@ -75,11 +104,15 @@ class ReservationController {
 
                     case "deleteResa":
                         $id = $_GET['id'];
-                        var_dump($reservationModel->findReservationById($id));
                         $reservationModel->deleteReservation($reservationModel->findReservationById($id));
                         
-                        header("location: ?action=menuClient");
-                        exit;
+                        if(unserialize($_SESSION['user'])->getRole() === "ADMIN") {
+                            header("location: ?action=gestionReservation");
+                            exit;
+                        } else {
+                            header("location: ?action=menuClient");
+                            exit;
+                        }
 
                     case "gestionReservation": 
                         $reservations = $reservationModel->findAllReservation();
@@ -89,6 +122,16 @@ class ReservationController {
                     case "addReservation":
                         header("location: ?action=reservation");
                         exit;
+
+                    case "modifyResa":
+                        $id = $_GET["id"];
+                        $resa = $reservationModel->findReservationById($id);
+                        $listClients = $clientModel->findClientAccount();
+                        $listVehicules = $vehiculeModel->findAllVehicle();
+                        $_SESSION['reservationSauv'] = serialize($resa);
+                        include "vue/formReservation.php";
+                        break;
+
                 }
             } 
         }

@@ -108,4 +108,22 @@ class ReservationModel extends ModelGeneric {
         return $reservation;
     }
 
+    //mettre à jour une réservation 
+    public function updateReservation(Reservation $reservation) {
+
+        $nouveauMontant = $this->calculatePrice($reservation, $reservation->getIdVehicule());
+        $reservation->setPrixTotal($nouveauMontant);
+
+        $query = "UPDATE reservation SET date_reservation = now(), date_debut = :date_debut, date_fin = :date_fin, prix_total = :prix_total, id_vehicule = :id_vehicule, id_personne = :id_personne WHERE reservation.id_reservation = :id_reservation";
+        $this->executeRequest($query, [
+            "id_reservation" => $reservation->getIdReservation(),
+            "date_debut" => $reservation->getDateDebut(),
+            "date_fin" => $reservation->getDateFin(),
+            "prix_total" => $reservation->getPrixTotal(),
+            "id_vehicule" => $reservation->getIdVehicule(),
+            "id_personne" => $reservation->getIdPersonne(),
+        ]);
+        $this->addReservationPrice($reservation, $nouveauMontant);
+    }
+
 }
