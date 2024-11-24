@@ -50,7 +50,12 @@
             <h5 class="text-center">
                 Mes évaluations
             </h5>
-            <p> A compléter avec les évaluations déjà mise !</p>
+            <table>
+                <?php foreach($commentaires as $comment): ?>
+                    <th><?= $comment->getNote() ?></th>
+                    <th><?= $comment->getDateCommentaire() ?></th>
+                <?php endforeach; ?>
+            </table>
         </div>
 
         <div class="flex-fill bg-light rounded p-3 mb-3 d-flex flex-column shadow-sm">

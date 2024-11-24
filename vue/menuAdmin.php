@@ -3,10 +3,31 @@
 <h4 class="mb-3 text-center">Bonjour <?= unserialize($_SESSION['user'])->getPrenom() ?> ! <i class="bi bi-sun-fill text-warning"></i></h4>
 <div class="container vh-100 d-flex">
     <div class="w-50 bg-light rounded p-3 me-3 d-flex flex-column">
-        <h5 class="text-center">
+        <h5 class="text-center mb-3">
             Commentaires des clients
         </h5>
-        <p> A compléter avec les évaluations déjà mise !</p>
+
+        <?php foreach($commentaires as $comment): ?>
+            <p class="card-text fst-italic mb-3">
+                "<?= htmlspecialchars($comment->getCommentaire()); ?>"
+            </p>
+            <h6 class="card-title mb-0">
+                <?php 
+                $modelAccount = new AccountModel();
+                $client = $modelAccount->findAccountById($comment->getIdPersonne());
+                echo $client->getNom() . " " . $client->getPrenom(); ?>
+            </h6>
+
+            <p class="card-text text-muted mb-0">
+                Note : 
+                <span>
+                    <?= htmlspecialchars($comment->getNote()); ?>/5
+                </span>
+            </p>
+
+            <hr>
+        <?php endforeach; ?>
+
     </div>
 
     <div class="w-50 d-flex flex-column">
@@ -25,15 +46,23 @@
             </h5>
             <p class="text-center display-1 m-0">
                 <?php echo count($nombreVehicules) ?>
-                <li>
-                    Véhicules 2 roues : 
+                <table class="table mt-3">
                     <?php 
-                        // array_filter($nombreVehicules, function($vehicules) {
-                        //     return $vehicules->getTypeVehicule === '2_roues';
-                        // });
-                        // echo count($vehicules);
-                    ?>
-                </li>
+                    $compteurs = [];
+                    foreach ($nombreVehicules as $vehicule) {
+                        $type = $vehicule->getTypeVehicule();
+                        if (!isset($compteurs[$type])) {
+                            $compteurs[$type] = 0;
+                        }
+                        $compteurs[$type]++;
+                    }
+                    foreach ($compteurs as $type => $nombre): ?>
+                        <tr>
+                            <td><?= $type ?></td>
+                            <td><?= $nombre ?></td>
+                        </tr>
+                    <?php endforeach; ?>
+                </table>
                 
             </p>
         </div>

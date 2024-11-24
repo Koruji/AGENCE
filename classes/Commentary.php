@@ -5,14 +5,16 @@ class Commentary {
     private $commentaire;
     private $dateCommentaire;
     private $note;
+    private $id_reservation;
     private $id_vehicule;
     private $id_personne;
 
-    public function __construct($id_vehicule, $id_personne, $id_commentaire = '', $commentaire = '', $dateCommentaire = '', $note = '') {
+    public function __construct($id_vehicule, $id_personne, $id_reservation, $id_commentaire = '', $commentaire = '', $dateCommentaire = '', $note = '') {
         $this->id_commentaire = $id_commentaire;
         $this->commentaire = $commentaire;
         $this->dateCommentaire = $dateCommentaire;
         $this->note = $note;
+        $this->id_reservation = $id_reservation;
         $this->id_vehicule = $id_vehicule;
         $this->id_personne = $id_personne;
     }
@@ -65,5 +67,12 @@ class Commentary {
         $this->id_personne = $id_personne;
     }
 
+    public function getIdReservation() {
+        return $this->id_reservation;
+    }
+
+    public function setIdReservation($id_reservation) {
+        $this->id_reservation = $id_reservation;
+    }
     
 }
