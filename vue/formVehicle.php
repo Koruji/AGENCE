@@ -62,7 +62,7 @@
 
     <div class="form-group">
         <label for="photo">Photo :</label>
-        <input type="file" id="photo" name="photo" class="form-control" accept="image/*" value="">
+        <input type="file" id="photo" name="photo" class="form-control" accept="image/*" value="<?php if(isset($vehicule)) { $img = $vehicule->getPhoto();} ?>">
     </div>
 
     <input type="submit" name="<?php if(isset($vehicule)) {echo "modifyVehicle";} else {echo "addVehicle";} ?>" class="btn btn-primary mt-2" value="Enregistrer">

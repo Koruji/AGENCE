@@ -18,7 +18,9 @@
             </tr>
             <?php foreach($vehicules as $vehicule): ?>
                 <tr>
-                    <td> <?= $vehicule->getPhoto() ?> </td>
+                    <td> <?php if(file_exists($vehicule->getPhoto())) : ?> 
+                        <img src="<?php echo $vehicule->getPhoto(); ?>" alt="Image du véhicule" width="100" height="100">
+                    <?php endif; ?> </td>
                     <td> <?= $vehicule->getMarque() ?> </td>
                     <td> <?= $vehicule->getModele() ?> </td>
                     <td> <?= $vehicule->getMatricule() ?> </td>

@@ -1,7 +1,7 @@
 <?php ob_start(); ?>
     
 <?php if(!isset($_SESSION['user'])) : ?>
-    <div>
+    <div class="bg-light rounded p-3 mb-3 d-flex flex-column shadow-sm">
         <p>Un de nos véhicules vous plaît ? Créez un compte pour réserver dès maintenant.</p>
         <a href="?action=createAccount" class="btn btn-primary mt-2">Créer un compte</a>
     </div>
@@ -51,7 +51,9 @@
         </tr>
         <?php foreach($vehiculeDispo as $vehicule): ?>
             <tr>
-                <td> <?= $vehicule->getPhoto() ?> </td>
+                <td> <?php if(file_exists($vehicule->getPhoto())) : ?> 
+                    <img src="<?php echo $vehicule->getPhoto(); ?>" alt="Image du véhicule" width="100" height="100">
+                <?php endif; ?> </td>
                 <td> <?= $vehicule->getMarque() ?> </td>
                 <td> <?= $vehicule->getModele() ?> </td>
                 <td> <?= $vehicule->getPrixJournalier() ?> &euro; </td>

@@ -1,5 +1,5 @@
 <?php
-require_once 'classes/Account.php';  // Inclure la classe Account
+require_once 'classes/Account.php';
 ?>
 
 <!DOCTYPE html>
