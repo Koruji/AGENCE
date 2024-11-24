@@ -1,0 +1,19 @@
+.colonneGauche, .colonneDroite {
+    display: flex;
+    flex-direction: column;
+}
+
+.conteneur {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 10px;
+}
+
+.evaluation, .reservation {
+    overflow-y: auto;
+}
+
+.tableCommentAdmin {
+    overflow-y: auto;
+}
+

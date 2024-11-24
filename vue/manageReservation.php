@@ -5,7 +5,7 @@
 </div>
 
 <div class="mt-3">
-    <table class="table table-striped">
+    <table class="table table-striped text-center">
             <tr>
                 <th>Date de réservation</th>
                 <th>Date de début</th>

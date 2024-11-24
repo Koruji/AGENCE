@@ -1,17 +1,17 @@
 <?php ob_start(); ?>
 
 <h4 class="mb-3 text-center">Bonjour <?= unserialize($_SESSION['user'])->getPrenom() ?> ! <i class="bi bi-sun-fill text-warning"></i></h4>
-<div class="container vh-100 d-flex">
-    <div class="w-50 bg-light rounded p-3 me-3 d-flex flex-column">
+<div class="conteneur">
+    <div class="bg-light rounded p-3 mb-3 shadow-sm colonneGauche">
         <h5 class="text-center mb-3">
             Commentaires des clients
         </h5>
 
         <?php foreach($commentaires as $comment): ?>
-            <p class="card-text fst-italic mb-3">
+            <p class="card-text fst-italic mb-3 ">
                 "<?= htmlspecialchars($comment->getCommentaire()); ?>"
             </p>
-            <h6 class="card-title mb-0">
+            <h6 class="card-title mb-0 ">
                 <?php 
                 $modelAccount = new AccountModel();
                 $client = $modelAccount->findAccountById($comment->getIdPersonne());
@@ -19,10 +19,14 @@
             </h6>
 
             <p class="card-text text-muted mb-0">
-                Note : 
-                <span>
-                    <?= htmlspecialchars($comment->getNote()); ?>/5
-                </span>
+                <th><?php 
+                    $numberStar = $comment->getNote();
+                    $affichageNote = "";
+                    for ($i = 0; $i < $numberStar; $i++) {
+                        $affichageNote .= '<i class="bi bi-star-fill"></i>';
+                    }
+                    echo $affichageNote;                            
+                ?></th>
             </p>
 
             <hr>
@@ -30,8 +34,8 @@
 
     </div>
 
-    <div class="w-50 d-flex flex-column">
-        <div class="flex-fill bg-light rounded p-3 mb-3 d-flex flex-column">
+    <div class="colonneDroite">
+        <div class="flex-fill bg-light rounded p-3 mb-3 d-flex flex-column shadow-sm">
             <h5 class="text-center">
                 Nombre de clients
             </h5>
@@ -40,7 +44,7 @@
             ?></p>
         </div>
 
-        <div class="flex-fill bg-light rounded p-3 mb-3 d-flex flex-column">
+        <div class="flex-fill bg-light rounded p-3 mb-3 d-flex flex-column shadow-sm">
             <h5 class="text-center">
                 Nombre de véhicules enregistrés
             </h5>

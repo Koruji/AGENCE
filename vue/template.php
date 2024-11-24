@@ -9,6 +9,7 @@ require_once 'classes/Account.php';  // Inclure la classe Account
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="vue/CSS/style.css">
     <title>Location de véhicules</title>
 </head>
 <body class="container">
