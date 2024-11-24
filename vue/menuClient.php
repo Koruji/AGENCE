@@ -61,7 +61,15 @@
                             }
                             echo $affichageNote;                            
                         ?></th>
-                        <th><?= $comment->getDateCommentaire() ?></th>
+                        <th><?php 
+                            $modelV = new VehicleModel();
+                            $vehicule = $modelV->findVehicleById($comment->getIdVehicule());
+                            $affichage = $vehicule->getModele();
+                            echo $affichage;
+                        ?></th>
+                        <th><?php 
+                            echo $comment->getCommentaire();
+                        ?></th>
                     </tr>
                 <?php endforeach; ?>
             </table>
