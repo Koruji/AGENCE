@@ -12,7 +12,7 @@ class VehicleController {
                 header("location: ?action=gestionVehicule");
                 exit;
             }
-            else if(isset($_POST["modifyVehicle"])) {
+            if(isset($_POST["modifyVehicle"])) {
                 extract($_POST);
                 $modifyVehicule = new Vehicle();
                 $modifyVehicule->setIdVehicule(unserialize($_SESSION['sauvVehicule']));
@@ -23,7 +23,7 @@ class VehicleController {
                 $modifyVehicule->setTypeVehicule($type_vehicule);
                 $modifyVehicule->setStatutDispo($statut_dispo);
                 $modifyVehicule->setPhoto("");
-          ;
+
                 $vehicleModel->modifyVehicle($modifyVehicule);
                 header("location: ?action=gestionVehicule");
                 exit;

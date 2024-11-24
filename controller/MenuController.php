@@ -27,9 +27,24 @@ class MenuController {
                     include "vue/menuClient.php";
                     break;
                 case "listVehicle":
-                    $vehiculeDispo = $modelVehicle->findAvailableVehicle();
+                    $marqueVehicule = $modelVehicle->findAllVehicleMarque();
+                    $modeleVehicule = $modelVehicle->findAllVehicleModele();
+
+                    if (isset($_POST['vehiculeSearchBar'])) {
+                        // Récupérer les critères de recherche
+                        $type = !empty($_POST['vehiculeType']) ? $_POST['vehiculeType'] : null;
+                        $marque = !empty($_POST['vehiculeMarque']) ? $_POST['vehiculeMarque'] : null;
+                        $modele = !empty($_POST['vehiculeModele']) ? $_POST['vehiculeModele'] : null;
+                    
+                        // Traiter la recherche et obtenir les résultats
+                        $vehiculeDispo = $modelVehicle->findVehiculeBySearch($type, $marque, $modele);
+                    } else {
+                        // Si aucune recherche, on affiche tous les véhicules disponibles
+                        $vehiculeDispo = $modelVehicle->findAvailableVehicle();
+                    }
+
                     include "vue/listVehicule.php";
-                    break;
+                    break;  
                 case "menuCommentary":
                     $idUser = unserialize($_SESSION['user'])->getIdPersonne();
                     $pastReservation = $modelReservation->findAllPastReservationByAccount($idUser);

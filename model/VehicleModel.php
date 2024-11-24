@@ -71,4 +71,53 @@ class VehicleModel extends ModelGeneric {
         }
         return $vehicles;
     }
+
+    //rechercher toutes les marques de véhicules 
+    public function findAllVehicleMarque() {
+        $query = $this->executeRequest("SELECT DISTINCT marque FROM vehicule");
+        $typeVehicule = [];
+        while ($row = $query->fetch()) {
+            $typeVehicule[] = $row['marque'];
+        }
+        return $typeVehicule;
+    }
+
+    //rechercher tous les modèles de véhicules 
+    public function findAllVehicleModele() {
+        $query = $this->executeRequest("SELECT DISTINCT modele FROM vehicule");
+        $modeleVehicule = [];
+        while ($row = $query->fetch()) {
+            $modeleVehicule[] = $row['modele'];
+        }
+        return $modeleVehicule;
+    }
+
+    //rechercher les véhicules via la barre de recherche
+    public function findVehiculeBySearch($type_vehicule, $marque, $modele) {
+        $requete = "SELECT * FROM vehicule WHERE 0=0";
+
+        $params= [];
+        if (!empty($type_vehicule)) {
+            $requete .= " AND type_vehicule = :type_vehicule";
+            $params[':type_vehicule'] = $type_vehicule;
+        }
+
+        if (!empty($marque)) {
+            $requete .= " AND marque = :marque";
+            $params[':marque'] = $marque;
+        }
+
+        if (!empty($modele)) {
+            $requete .= " AND modele = :modele";
+            $params[':modele'] = $modele;
+        }
+
+        $query = $this->executeRequest($requete, $params);
+        $vehicules = [];
+        while($v = $query->fetch()){
+            extract($v);
+            $vehicules[] = new Vehicle($id_vehicule, $marque, $modele, $matricule, $prix_journalier, $type_vehicule, $statut_dispo, $photo);
+        }
+        return $vehicules;
+    }
 }

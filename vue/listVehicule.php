@@ -7,10 +7,36 @@
     </div>
 <?php endif; ?> 
 
-<div>
-    <a href="" class="btn btn-primary mt-2">Rechercher un véhicule</a>
-    <p>barre de recherche</p>
-</div>
+<form action="" method="POST">
+    <div class="input-group mb-3">
+        <select class="form-select" name="vehiculeType">
+            <option value="" selected>Type</option>
+            <option value="2_roues">2 roues</option>
+            <option value="camion">Camion</option>
+            <option value="voiture">Voiture</option>
+        </select>
+
+        <select class="form-select" name="vehiculeMarque">
+            <option value="" selected>Marque</option>
+            <?php
+                foreach ($marqueVehicule as $marque) {
+                    echo "<option value=\"$marque\">$marque</option>";
+                }
+            ?>
+        </select>
+
+        <select class="form-select" name="vehiculeModele">
+            <option value="" selected>Modèle</option>
+            <?php
+                foreach ($modeleVehicule as $modele) {
+                    echo "<option value=\"$modele\">$modele</option>";
+                }
+            ?>
+        </select>
+        
+        <input class="btn btn-outline-secondary" name="vehiculeSearchBar" type="submit" value="Rechercher">
+    </div>
+</form>
 
 <div class="mt-3">
     <table class="table table-striped">
