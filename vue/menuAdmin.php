@@ -9,7 +9,7 @@
 
         <?php foreach($commentaires as $comment): ?>
             <p class="card-text fst-italic mb-3 ">
-                "<?= htmlspecialchars($comment->getCommentaire()); ?>"
+                "<?= $comment->getCommentaire(); ?>"
             </p>
             <h6 class="card-title mb-0 ">
                 <?php 

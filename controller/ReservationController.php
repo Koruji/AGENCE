@@ -90,7 +90,9 @@ class ReservationController {
                         }  
                         if(isset($_GET['message'])) {
                             $erreur = $_GET['message'];
-                        }                        
+                        } 
+                        $listClients = $clientModel->findClientAccount();
+                        $listVehicules = $vehiculeModel->findAllVehicle();                       
                         include "vue/formReservation.php";
                         break;
 

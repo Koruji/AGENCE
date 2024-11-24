@@ -24,7 +24,9 @@ class VehicleController {
                 exit;
             }
             if(isset($_POST["modifyVehicle"])) {
-                if (isset($_FILES['photo'])) {
+                extract($_POST);
+                $cheminActuelPhoto = $vehicleModel->findVehicleById(unserialize($_SESSION['sauvVehicule']))->getPhoto();
+                if ($cheminActuelPhoto !== $photo && isset($_FILES['photo'])) {
                     $filePath = $_FILES['photo']['tmp_name'];
                     $fileName = $_FILES['photo']['name'];
                     $fileExtension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
@@ -35,9 +37,7 @@ class VehicleController {
                     }
                     move_uploaded_file($filePath, $newFilePath);
                 }
-                extract($_POST);
-
-                extract($_POST);
+                
                 $modifyVehicule = new Vehicle();
                 $modifyVehicule->setIdVehicule(unserialize($_SESSION['sauvVehicule']));
                 $modifyVehicule->setMarque($marque);

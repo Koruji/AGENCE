@@ -63,7 +63,7 @@ class AccountController {
                 $modifyAccount->setDateInscription(null);
                 $modifyAccount->setTel($tel);
                 $modifyAccount->setMdp($compteSauv->getMdp());
-                $modifyAccount->setDepenses($depenses);
+                $modifyAccount->setDepenses($compteSauv->getDepenses());
 
                 $accountModel->updateAccount($modifyAccount);
 
